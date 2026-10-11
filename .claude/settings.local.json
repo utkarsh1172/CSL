@@ -8,7 +8,9 @@
       "Bash(kill 2792)",
       "Bash(netstat -ano)",
       "Bash(findstr :3000)",
-      "Bash(C:\\\\Windows\\\\System32\\\\taskkill.exe /PID 2792 /F)"
+      "Bash(C:\\\\Windows\\\\System32\\\\taskkill.exe /PID 2792 /F)",
+      "Bash(wmic process *)",
+      "Bash(curl -s http://localhost:3000/insights/emotional-intelligence-in-leadership)"
     ]
   }
 }

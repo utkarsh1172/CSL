@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 import { navigationGroups } from "@/config/navigation";
 
@@ -19,6 +22,27 @@ function ChevronIcon() {
 }
 
 export function SiteHeader() {
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+
+  const handleMouseEnter = (label: string) => {
+    setOpenGroup(label);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenGroup(null);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent, label: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (openGroup === label) {
+        setOpenGroup(null);
+      } else {
+        setOpenGroup(label);
+      }
+    }
+  };
+
   return (
     <header className="site-header">
       <div className="site-header__inner">
@@ -26,19 +50,32 @@ export function SiteHeader() {
 
         <nav className="desktop-navigation" aria-label="Primary navigation">
           {navigationGroups.map((group) => (
-            <details className="navigation-group" key={group.label}>
-              <summary aria-label={group.label}>
+            <div
+              key={group.label}
+              className={`navigation-group${openGroup === group.label ? " open" : ""}`}
+              onMouseEnter={() => handleMouseEnter(group.label)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div
+                className="navigation-group-header"
+                aria-label={group.label}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => handleKeyDown(e, group.label)}
+              >
                 {group.label}
                 <ChevronIcon />
-              </summary>
-              <div className="navigation-dropdown">
-                {group.links.map((link) => (
-                  <Link aria-label={link.label} href={link.href} key={link.href}>
-                    {link.label}
-                  </Link>
-                ))}
               </div>
-            </details>
+              {openGroup === group.label && (
+                <div className="navigation-dropdown">
+                  {group.links.map((link) => (
+                    <Link aria-label={link.label} href={link.href} key={link.href}>
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 
@@ -54,7 +91,11 @@ export function SiteHeader() {
           </summary>
           <nav className="mobile-navigation__panel" aria-label="Mobile navigation">
             {navigationGroups.map((group) => (
-              <details className="mobile-navigation__group" key={group.label}>
+              <details
+                className="mobile-navigation__group"
+                key={group.label}
+                name="mobile-navigation"
+              >
                 <summary aria-label={group.label}>
                   {group.label}
                   <ChevronIcon />
