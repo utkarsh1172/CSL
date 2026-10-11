@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 import type { BlogPostSummary } from "@/types/blog";
@@ -17,16 +18,6 @@ function SearchIcon() {
     <svg aria-hidden="true" viewBox="0 0 24 24">
       <circle cx="10.8" cy="10.8" r="6.2" />
       <path d="m15.4 15.4 4.2 4.2" />
-    </svg>
-  );
-}
-
-function LinkedInIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 76 24">
-      <text x="0" y="19">Linked</text>
-      <rect x="52" y="3" width="22" height="18" rx="2" />
-      <text className="blog-linkedin__in" x="55" y="18">in</text>
     </svg>
   );
 }
@@ -115,7 +106,13 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
               target="_blank"
             >
               <span>Follow Us:</span>
-              <LinkedInIcon />
+              <Image
+                alt=""
+                aria-hidden="true"
+                height={26}
+                src="/images/brand/linkedin-2021.png"
+                width={104}
+              />
             </a>
           </div>
 
