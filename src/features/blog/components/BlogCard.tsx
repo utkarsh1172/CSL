@@ -10,22 +10,22 @@ type BlogCardProps = {
 export function BlogCard({ post }: BlogCardProps) {
   return (
     <article className="blog-card">
-      <div className="blog-card__media">
-        <Image
-          alt="Business leaders discussing a next-generation business solution"
-          height={273}
-          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1080px) 45vw, 230px"
-          src={post.imageSrc}
-          width={238}
-        />
-      </div>
-      <div className="blog-card__body">
-        <h3>{post.title}</h3>
-        <p>{post.excerpt}</p>
-        <Link aria-label={`Read more about ${post.title}`} href={post.href}>
-          Read More...
-        </Link>
-      </div>
+      <Link aria-label={`Read more about ${post.title}`} href={post.href}>
+        <div className="blog-card__media">
+          <Image
+            alt="Business leaders discussing a next-generation business solution"
+            height={409}
+            sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1080px) 45vw, 230px"
+            src={post.imageSrc}
+            width={1084}
+          />
+        </div>
+        <div className="blog-card__body">
+          <h3>{post.title}</h3>
+          <p>{post.excerpt}</p>
+          <span className="blog-card__read-more">Read More...</span>
+        </div>
+      </Link>
     </article>
   );
 }

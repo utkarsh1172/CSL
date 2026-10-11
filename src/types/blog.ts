@@ -6,3 +6,66 @@ export type BlogPostSummary = {
   imageSrc: string;
   href: string;
 };
+
+export type BlogAuthor = {
+  name: string;
+  role: string;
+  organization: string;
+  bio: string;
+  initials: string;
+};
+
+export type BlogStat = {
+  value: string;
+  label: string;
+  trend: string;
+};
+
+export type BlogContentSection = {
+  title: string;
+  paragraphs: string[];
+  bullets?: string[];
+  note?: {
+    title: string;
+    body: string;
+  };
+};
+
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
+
+export type RelatedBlogPost = {
+  id: string;
+  title: string;
+  href: string;
+};
+
+export type BlogPostDetail = BlogPostSummary & {
+  slug: string;
+  publishedAt: string;
+  author: BlogAuthor;
+  tags: string[];
+  tldr: string[];
+  quote: {
+    text: string;
+    attribution: string;
+  };
+  introduction: BlogContentSection;
+  stats: BlogStat[];
+  comparison: {
+    title: string;
+    columns: [string, string, string];
+    rows: [string, string, string][];
+  };
+  sections: BlogContentSection[];
+  cta: {
+    title: string;
+    points: string[];
+    label: string;
+    href: string;
+  };
+  faqs: BlogFaq[];
+  relatedPosts: RelatedBlogPost[];
+};
