@@ -152,7 +152,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                   <span className="article-tldr__rocket">
                     <RocketIcon />
                   </span>
-                  TL;DR
+                  TL:DR
                 </h2>
                 <a href="https://www.linkedin.com" rel="noreferrer" target="_blank">
                   Follow Us:
