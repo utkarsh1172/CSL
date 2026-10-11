@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(rtk npm *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(taskkill /PID 2792 /F)",
+      "Bash(kill 2792)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3000)",
+      "Bash(C:\\\\Windows\\\\System32\\\\taskkill.exe /PID 2792 /F)"
+    ]
+  }
+}
