@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { navigationGroups } from "@/config/navigation";
 
@@ -23,6 +23,18 @@ function ChevronIcon() {
 
 export function SiteHeader() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const navigationRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (event.target instanceof Node && !navigationRef.current?.contains(event.target)) {
+        setOpenGroup(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePress);
+  }, []);
 
   const handleMouseEnter = (label: string) => {
     setOpenGroup(label);
@@ -32,49 +44,56 @@ export function SiteHeader() {
     setOpenGroup(null);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, label: string) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      if (openGroup === label) {
-        setOpenGroup(null);
-      } else {
-        setOpenGroup(label);
-      }
-    }
-  };
-
   return (
     <header className="site-header">
       <div className="site-header__inner">
         <BrandLogo priority />
 
-        <nav className="desktop-navigation" aria-label="Primary navigation">
+        <nav className="desktop-navigation" aria-label="Primary navigation" ref={navigationRef}>
           {navigationGroups.map((group) => (
             <div
               key={group.label}
               className={`navigation-group${openGroup === group.label ? " open" : ""}`}
               onMouseEnter={() => handleMouseEnter(group.label)}
               onMouseLeave={handleMouseLeave}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setOpenGroup(null);
+                }
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setOpenGroup(null);
+                  event.currentTarget.querySelector("button")?.focus();
+                }
+              }}
             >
-              <div
+              <button
                 className="navigation-group-header"
-                aria-label={group.label}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => handleKeyDown(e, group.label)}
+                type="button"
+                aria-expanded={openGroup === group.label}
+                aria-controls={`navigation-${group.label.toLowerCase()}`}
+                onClick={(event) => {
+                  const pointerWithHover = event.detail > 0 && window.matchMedia("(hover: hover)").matches;
+                  setOpenGroup((current) =>
+                    pointerWithHover ? group.label : current === group.label ? null : group.label,
+                  );
+                }}
               >
                 {group.label}
                 <ChevronIcon />
+              </button>
+              <div
+                className="navigation-dropdown"
+                id={`navigation-${group.label.toLowerCase()}`}
+                inert={openGroup !== group.label}
+              >
+                {group.links.map((link) => (
+                  <Link aria-label={link.label} href={link.href} key={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
-              {openGroup === group.label && (
-                <div className="navigation-dropdown">
-                  {group.links.map((link) => (
-                    <Link aria-label={link.label} href={link.href} key={link.href}>
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </nav>

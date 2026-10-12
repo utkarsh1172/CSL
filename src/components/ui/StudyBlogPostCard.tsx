@@ -10,6 +10,7 @@ type StudyBlogPostCardProps = {
   tags: string[];
   readTime: number;
   slug: string;
+  revealDelay?: number;
 };
 
 export function StudyBlogPostCard({
@@ -22,6 +23,7 @@ export function StudyBlogPostCard({
   tags,
   readTime,
   slug,
+  revealDelay = 0,
 }: StudyBlogPostCardProps) {
   const date = new Date(publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
@@ -30,8 +32,12 @@ export function StudyBlogPostCard({
   });
 
   return (
-    <Link href={`/insights/${slug}`} passHref>
-      <article className="study-blog-post-card">
+    <Link className="study-blog-post-card__link" href={`/insights/${slug}`}>
+      <article
+        className="study-blog-post-card"
+        data-reveal="up"
+        data-reveal-delay={revealDelay}
+      >
         <div className="study-blog-post-card__image">
           <img
             src={coverImage}

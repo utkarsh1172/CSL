@@ -10,15 +10,26 @@ export default function HomePage() {
         <section className="home-hero" aria-labelledby="home-heading">
           <div className="home-hero__inner">
             <div className="home-hero__content">
-              <p className="home-hero__eyebrow">Canada School of Leadership</p>
+              <p className="home-hero__eyebrow" data-reveal="up">
+                Canada School of Leadership
+              </p>
               <h1 id="home-heading">
-                Leadership learning for a <span>changing world.</span>
+                <span className="home-hero__heading-line" data-reveal="text" data-reveal-delay="1">
+                  Leadership learning for a
+                </span>{" "}
+                <span
+                  className="home-hero__heading-line home-hero__heading-line--accent"
+                  data-reveal="text"
+                  data-reveal-delay="3"
+                >
+                  changing world.
+                </span>
               </h1>
-              <p className="home-hero__summary">
+              <p className="home-hero__summary" data-reveal="up" data-reveal-delay="4">
                 Practical programs for professionals and organizations ready to lead with
                 confidence, clarity, and purpose.
               </p>
-              <div className="home-hero__actions">
+              <div className="home-hero__actions" data-reveal="up" data-reveal-delay="5">
                 <Link className="button button--light" href="/programs">
                   Explore Programs
                 </Link>
@@ -28,7 +39,12 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="home-hero__visual" aria-hidden="true">
+            <div
+              aria-hidden="true"
+              className="home-hero__visual"
+              data-reveal="scale"
+              data-reveal-delay="3"
+            >
               <div className="leadership-orbit leadership-orbit--one" />
               <div className="leadership-orbit leadership-orbit--two" />
               <div className="leadership-orbit leadership-orbit--three" />

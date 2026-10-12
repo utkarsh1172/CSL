@@ -50,7 +50,7 @@ function RocketIcon() {
 
 function ArticleSection({ section }: { section: BlogContentSection }) {
   return (
-    <section className="article-section">
+    <section className="article-section" data-reveal="up">
       <h2>{section.title}</h2>
       {section.paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
@@ -86,7 +86,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
       <main className="article-page">
         <article>
           <div className="article-shell">
-            <nav className="article-breadcrumb" aria-label="Breadcrumb">
+            <nav aria-label="Breadcrumb" className="article-breadcrumb" data-reveal="up">
               <Link href="/">Home</Link>
               <span aria-hidden="true">›</span>
               <span>Discover</span>
@@ -98,8 +98,10 @@ export function BlogArticle({ post }: BlogArticleProps) {
 
             <header className="article-header">
               <div className="article-heading-row">
-                <h1>{post.title}</h1>
-                <div className="article-share">
+                <h1 data-reveal="text" data-reveal-delay="1">
+                  {post.title}
+                </h1>
+                <div className="article-share" data-reveal="left" data-reveal-delay="2">
                   <a
                     aria-label="Share this article on LinkedIn"
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://canadaschoolofleadership.com${post.href}`)}`}
@@ -121,7 +123,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 </div>
               </div>
 
-              <div className="article-hero">
+              <div className="article-hero" data-reveal="scale" data-reveal-delay="2">
                 <Image
                   alt="Business leaders presenting a next-generation business solution"
                   height={409}
@@ -132,7 +134,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 />
               </div>
 
-              <div className="article-meta">
+              <div className="article-meta" data-reveal="up" data-reveal-delay="3">
                 <div className="article-tags" aria-label="Article topics">
                   {post.tags.map((tag, index) => (
                     <span key={`${tag}-${index}`}>{tag}</span>
@@ -146,13 +148,17 @@ export function BlogArticle({ post }: BlogArticleProps) {
               </div>
             </header>
 
-            <section className="article-tldr" aria-labelledby="article-tldr-title">
+            <section
+              aria-labelledby="article-tldr-title"
+              className="article-tldr"
+              data-reveal="up"
+            >
               <div className="article-tldr__header">
                 <h2 id="article-tldr-title">
                   <span className="article-tldr__rocket">
                     <RocketIcon />
                   </span>
-                  TL:DR
+                  TL;DR
                 </h2>
                 <a href="https://www.linkedin.com" rel="noreferrer" target="_blank">
                   Follow Us:
@@ -173,7 +179,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
               <div className="article-copy">
                 <ArticleSection section={post.introduction} />
 
-                <blockquote className="article-quote">
+                <blockquote className="article-quote" data-reveal="right">
                   <p>“{post.quote.text}”</p>
                   <cite>— {post.quote.attribution}</cite>
                 </blockquote>
@@ -184,9 +190,17 @@ export function BlogArticle({ post }: BlogArticleProps) {
 
                     {index === 0 ? (
                       <>
-                        <section className="article-stats" aria-label="PMP certification statistics">
-                          {post.stats.map((stat) => (
-                            <div key={stat.value}>
+                        <section
+                          aria-label="PMP certification statistics"
+                          className="article-stats"
+                          data-reveal="up"
+                        >
+                          {post.stats.map((stat, statIndex) => (
+                            <div
+                              data-reveal="up"
+                              data-reveal-delay={statIndex + 1}
+                              key={stat.value}
+                            >
                               <span>{stat.trend}</span>
                               <strong>{stat.value}</strong>
                               <p>{stat.label}</p>
@@ -194,7 +208,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                           ))}
                         </section>
 
-                        <section className="article-comparison">
+                        <section className="article-comparison" data-reveal="up">
                           <h2>{post.comparison.title}</h2>
                           <div className="article-table-wrap">
                             <table>
@@ -230,7 +244,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                   </div>
                 ))}
 
-                <aside className="article-cta">
+                <aside className="article-cta" data-reveal="scale">
                   <h2>{post.cta.title}</h2>
                   <ul>
                     {post.cta.points.map((point) => (
@@ -240,7 +254,11 @@ export function BlogArticle({ post }: BlogArticleProps) {
                   <Link href={post.cta.href}>{post.cta.label}</Link>
                 </aside>
 
-                <section className="article-faq" aria-labelledby="article-faq-heading">
+                <section
+                  aria-labelledby="article-faq-heading"
+                  className="article-faq"
+                  data-reveal="up"
+                >
                   <h2 id="article-faq-heading">FAQ</h2>
                   <p>
                     Find quick answers about choosing a project management certification and the
@@ -256,7 +274,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                   </div>
                 </section>
 
-                <aside className="article-author" aria-label="About the author">
+                <aside aria-label="About the author" className="article-author" data-reveal="up">
                   <div className="article-author__identity">
                     <span className="article-author__avatar" aria-hidden="true">
                       {post.author.initials}
@@ -279,12 +297,21 @@ export function BlogArticle({ post }: BlogArticleProps) {
             </div>
           </div>
 
-          <section className="related-blogs" aria-labelledby="related-blogs-heading">
+          <section
+            aria-labelledby="related-blogs-heading"
+            className="related-blogs"
+            data-reveal="up"
+          >
             <div className="related-blogs__inner">
               <h2 id="related-blogs-heading">Our Related Blogs</h2>
               <div>
-                {post.relatedPosts.map((relatedPost) => (
-                  <Link href={relatedPost.href} key={relatedPost.id}>
+                {post.relatedPosts.map((relatedPost, index) => (
+                  <Link
+                    data-reveal="up"
+                    data-reveal-delay={index + 1}
+                    href={relatedPost.href}
+                    key={relatedPost.id}
+                  >
                     <span>{relatedPost.title}</span>
                     <ArrowIcon />
                   </Link>

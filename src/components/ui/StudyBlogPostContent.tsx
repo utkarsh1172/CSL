@@ -29,7 +29,7 @@ export function StudyBlogPostContent({
 
   return (
     <article className="study-blog-post-content">
-      <header className="study-blog-post-content__header">
+      <header className="study-blog-post-content__header" data-reveal="scale">
         <div className="study-blog-post-content__hero">
           <img
             src={coverImage}
@@ -73,7 +73,7 @@ export function StudyBlogPostContent({
         </div>
       </header>
 
-      <div className="study-blog-post-content__body">
+      <div className="study-blog-post-content__body" data-reveal-children>
         {content}
       </div>
 

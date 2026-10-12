@@ -9,12 +9,14 @@ export function StudyBlogList({ posts }: StudyBlogListProps) {
   return (
     <section className="study-blog-list">
       <div className="study-blog-list__container">
-        <h2 className="study-blog-list__title">Leadership Insights</h2>
-        <p className="study-blog-list__subtitle">
+        <h2 className="study-blog-list__title" data-reveal="text">
+          Leadership Insights
+        </h2>
+        <p className="study-blog-list__subtitle" data-reveal="up" data-reveal-delay="1">
           Latest research, frameworks, and perspectives from our faculty and practitioner community
         </p>
         <div className="study-blog-list__grid">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <StudyBlogPostCard
               key={post.id}
               title={post.title}
@@ -25,6 +27,7 @@ export function StudyBlogList({ posts }: StudyBlogListProps) {
               publishedAt={post.publishedAt}
               tags={post.tags}
               readTime={post.readTime}
+              revealDelay={index + 1}
               slug={post.id}
             />
           ))}

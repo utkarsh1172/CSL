@@ -7,7 +7,12 @@ type AdvisorFormProps = {
 
 export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
   return (
-    <aside className="advisor-card" aria-labelledby="advisor-heading">
+    <aside
+      aria-labelledby="advisor-heading"
+      className="advisor-card"
+      data-reveal="left"
+      data-reveal-delay="2"
+    >
       <p className="advisor-card__eyebrow">Get Started</p>
       <h2 id="advisor-heading">Explore the AI leadership program</h2>
       <p className="advisor-card__intro">
@@ -24,6 +29,37 @@ export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
           Email
         </label>
         <input id="advisor-email" name="email" placeholder="Email" required type="email" />
+
+        <div className="advisor-card__phone">
+          <label className="sr-only" htmlFor="advisor-country-code">
+            Country code
+          </label>
+          <select
+            aria-label="Country code"
+            defaultValue="+1"
+            id="advisor-country-code"
+            name="countryCode"
+            required
+          >
+            <option value="+1">CA +1</option>
+            <option value="+91">IN +91</option>
+            <option value="+44">UK +44</option>
+            <option value="+61">AU +61</option>
+            <option value="+971">UAE +971</option>
+          </select>
+          <label className="sr-only" htmlFor="advisor-phone">
+            Phone number
+          </label>
+          <input
+            autoComplete="tel-national"
+            id="advisor-phone"
+            inputMode="tel"
+            name="phone"
+            placeholder="Phone Number"
+            required
+            type="tel"
+          />
+        </div>
 
         <label className="sr-only" htmlFor="advisor-message">
           Message

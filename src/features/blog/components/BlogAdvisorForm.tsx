@@ -6,7 +6,12 @@ export function BlogAdvisorForm() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <aside className="article-advisor" aria-labelledby="article-advisor-heading">
+    <aside
+      aria-labelledby="article-advisor-heading"
+      className="article-advisor"
+      data-reveal="left"
+      data-reveal-delay="2"
+    >
       <p className="article-advisor__eyebrow">Get Started</p>
       <h2 id="article-advisor-heading">Explore the AI leadership program</h2>
       <p>
@@ -34,6 +39,37 @@ export function BlogAdvisorForm() {
           required
           type="email"
         />
+
+        <div className="article-advisor__phone">
+          <label className="sr-only" htmlFor="article-advisor-country-code">
+            Country code
+          </label>
+          <select
+            aria-label="Country code"
+            defaultValue="+1"
+            id="article-advisor-country-code"
+            name="countryCode"
+            required
+          >
+            <option value="+1">CA +1</option>
+            <option value="+91">IN +91</option>
+            <option value="+44">UK +44</option>
+            <option value="+61">AU +61</option>
+            <option value="+971">UAE +971</option>
+          </select>
+          <label className="sr-only" htmlFor="article-advisor-phone">
+            Phone number
+          </label>
+          <input
+            autoComplete="tel-national"
+            id="article-advisor-phone"
+            inputMode="tel"
+            name="phone"
+            placeholder="Phone Number"
+            required
+            type="tel"
+          />
+        </div>
 
         <label className="sr-only" htmlFor="article-advisor-message">
           Message

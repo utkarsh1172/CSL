@@ -47,7 +47,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
     <>
       <section className="blog-hero" aria-labelledby="blog-heading">
         <div className="blog-hero__inner">
-          <nav className="blog-breadcrumb" aria-label="Breadcrumb">
+          <nav aria-label="Breadcrumb" className="blog-breadcrumb" data-reveal="up">
             <a href="/">Home</a>
             <span aria-hidden="true">&gt;</span>
             <span>Discover</span>
@@ -55,9 +55,13 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
             <span aria-current="page">Blog</span>
           </nav>
           <div className="blog-hero__content">
-            <h1 id="blog-heading">Find our all blogs from here</h1>
-            <p>Our latest articles on mentorships, learning and development, employee retention</p>
-            <label className="blog-search">
+            <h1 data-reveal="text" data-reveal-delay="1" id="blog-heading">
+              Find our all blogs from here
+            </h1>
+            <p data-reveal="up" data-reveal-delay="2">
+              Our latest articles on mentorships, learning and development, employee retention
+            </p>
+            <label className="blog-search" data-reveal="up" data-reveal-delay="3">
               <span className="sr-only">Search blogs</span>
               <SearchIcon />
               <input
@@ -76,7 +80,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
 
       <section className="blog-content" aria-labelledby="recent-posts-heading">
         <div className="blog-content__inner">
-          <div className="blog-toolbar">
+          <div className="blog-toolbar" data-reveal="up">
             <div className="blog-categories" aria-label="Filter blog categories">
               <span>categories</span>
               {categories.map((category) => {
@@ -118,11 +122,13 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
 
           <div className="blog-content__columns">
             <div className="blog-posts">
-              <h2 id="recent-posts-heading">Our Recent Post</h2>
+              <h2 data-reveal="text" id="recent-posts-heading">
+                Our Recent Post
+              </h2>
               {visiblePosts.length > 0 ? (
                 <div className="blog-posts__grid">
-                  {visiblePosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
+                  {visiblePosts.map((post, index) => (
+                    <BlogCard key={post.id} post={post} revealDelay={(index % 3) + 1} />
                   ))}
                 </div>
               ) : (

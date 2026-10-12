@@ -5,11 +5,12 @@ import type { BlogPostSummary } from "@/types/blog";
 
 type BlogCardProps = {
   post: BlogPostSummary;
+  revealDelay?: number;
 };
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, revealDelay = 0 }: BlogCardProps) {
   return (
-    <article className="blog-card">
+    <article className="blog-card" data-reveal="up" data-reveal-delay={revealDelay}>
       <Link aria-label={`Read more about ${post.title}`} href={post.href}>
         <div className="blog-card__media">
           <Image
