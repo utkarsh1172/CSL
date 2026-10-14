@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { PhoneField } from "@/components/forms/PhoneField";
 import { spawnBoomBurstFrom } from "@/utils/boom-burst";
 
 export function BlogAdvisorForm() {
@@ -45,36 +46,7 @@ export function BlogAdvisorForm() {
           type="email"
         />
 
-        <div className="article-advisor__phone">
-          <label className="sr-only" htmlFor="article-advisor-country-code">
-            Country code
-          </label>
-          <select
-            aria-label="Country code"
-            defaultValue="+1"
-            id="article-advisor-country-code"
-            name="countryCode"
-            required
-          >
-            <option value="+1">CA +1</option>
-            <option value="+91">IN +91</option>
-            <option value="+44">UK +44</option>
-            <option value="+61">AU +61</option>
-            <option value="+971">UAE +971</option>
-          </select>
-          <label className="sr-only" htmlFor="article-advisor-phone">
-            Phone number
-          </label>
-          <input
-            autoComplete="tel-national"
-            id="article-advisor-phone"
-            inputMode="tel"
-            name="phone"
-            placeholder="Phone Number"
-            required
-            type="tel"
-          />
-        </div>
+        <PhoneField idPrefix="article-advisor" required />
 
         <label className="sr-only" htmlFor="article-advisor-message">
           Message

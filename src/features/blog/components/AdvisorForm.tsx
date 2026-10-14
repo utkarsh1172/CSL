@@ -1,5 +1,7 @@
 import type { FormEvent } from "react";
 
+import { PhoneField } from "@/components/forms/PhoneField";
+
 type AdvisorFormProps = {
   submitted: boolean;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -30,36 +32,7 @@ export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
         </label>
         <input id="advisor-email" name="email" placeholder="Email" required type="email" />
 
-        <div className="advisor-card__phone">
-          <label className="sr-only" htmlFor="advisor-country-code">
-            Country code
-          </label>
-          <select
-            aria-label="Country code"
-            defaultValue="+1"
-            id="advisor-country-code"
-            name="countryCode"
-            required
-          >
-            <option value="+1">CA +1</option>
-            <option value="+91">IN +91</option>
-            <option value="+44">UK +44</option>
-            <option value="+61">AU +61</option>
-            <option value="+971">UAE +971</option>
-          </select>
-          <label className="sr-only" htmlFor="advisor-phone">
-            Phone number
-          </label>
-          <input
-            autoComplete="tel-national"
-            id="advisor-phone"
-            inputMode="tel"
-            name="phone"
-            placeholder="Phone Number"
-            required
-            type="tel"
-          />
-        </div>
+        <PhoneField idPrefix="advisor" required />
 
         <label className="sr-only" htmlFor="advisor-message">
           Message

@@ -10,7 +10,15 @@
       "Bash(findstr :3000)",
       "Bash(C:\\\\Windows\\\\System32\\\\taskkill.exe /PID 2792 /F)",
       "Bash(wmic process *)",
-      "Bash(curl -s http://localhost:3000/insights/emotional-intelligence-in-leadership)"
+      "Bash(curl -s http://localhost:3000/insights/emotional-intelligence-in-leadership)",
+      "Bash(rtk read *)",
+      "Bash(grep -n -E \"^\\(/\\\\*|@|:root|\\\\.[a-z-]+\\(__[a-z-]+\\)?\\\\s*\\\\{|\\\\[data-reveal\\)\" src/app/globals.css)",
+      "Bash(rtk grep *)",
+      "Bash(python -c \"import PIL; print\\('pil', PIL.__version__\\)\")",
+      "Bash(npm run *)",
+      "Bash(rtk git *)",
+      "Read(//c/Users/Utkarsh/AppData/Local/Temp/claude/d--Project-CSL/c6a7ad4e-b464-46fa-bb14-b03bcb302d04/scratchpad/ref/**)",
+      "Bash(node -e ' *)"
     ]
   }
 }
