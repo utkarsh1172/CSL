@@ -5,6 +5,21 @@ import { useEffect } from "react";
 
 const revealSelector = "[data-reveal]";
 
+// Tags each `.reveal-word` with the rendered line it sits on, so lines can rise in sequence.
+function assignRevealLines(element: HTMLElement) {
+  let line = -1;
+  let lineTop = Number.NaN;
+
+  element.querySelectorAll<HTMLElement>(".reveal-word").forEach((word) => {
+    if (Number.isNaN(lineTop) || Math.abs(word.offsetTop - lineTop) > 2) {
+      line += 1;
+      lineTop = word.offsetTop;
+    }
+
+    word.style.setProperty("--line", String(line));
+  });
+}
+
 export function ScrollReveal() {
   const pathname = usePathname();
 
@@ -29,6 +44,10 @@ export function ScrollReveal() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) {
             return;
+          }
+
+          if (entry.target instanceof HTMLElement && entry.target.dataset.reveal === "lines") {
+            assignRevealLines(entry.target);
           }
 
           entry.target.classList.add("is-revealed");

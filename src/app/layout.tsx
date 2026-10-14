@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { BoomClickEffects } from "@/components/ui/BoomClickEffects";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 import "./globals.css";
@@ -19,7 +20,9 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // data-scroll-behavior lets Next.js pause the global smooth scrolling during route changes,
+    // so every page opens at the top instead of easing to a spot hidden under the sticky header.
+    <html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -36,6 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body suppressHydrationWarning>
         <ScrollReveal />
+        <BoomClickEffects />
         {children}
       </body>
     </html>

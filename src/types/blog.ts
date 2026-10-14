@@ -4,6 +4,7 @@ export type BlogPostSummary = {
   excerpt: string;
   category: string;
   imageSrc: string;
+  imageAlt: string;
   href: string;
 };
 
@@ -44,6 +45,8 @@ export type RelatedBlogPost = {
 
 export type BlogPostDetail = BlogPostSummary & {
   slug: string;
+  /** Short label used in the breadcrumb trail. */
+  shortTitle: string;
   publishedAt: string;
   author: BlogAuthor;
   tags: string[];
@@ -66,6 +69,6 @@ export type BlogPostDetail = BlogPostSummary & {
     label: string;
     href: string;
   };
+  faqIntro: string;
   faqs: BlogFaq[];
-  relatedPosts: RelatedBlogPost[];
 };

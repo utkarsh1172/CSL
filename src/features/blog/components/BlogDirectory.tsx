@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
+import { RevealLines } from "@/components/ui/RevealLines";
 import type { BlogPostSummary } from "@/types/blog";
+import { spawnBoomBurstFrom } from "@/utils/boom-burst";
 
 import { AdvisorForm } from "./AdvisorForm";
 import { BlogCard } from "./BlogCard";
@@ -47,7 +49,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
     <>
       <section className="blog-hero" aria-labelledby="blog-heading">
         <div className="blog-hero__inner">
-          <nav aria-label="Breadcrumb" className="blog-breadcrumb" data-reveal="up">
+          <nav aria-label="Breadcrumb" className="blog-breadcrumb" data-reveal="eyebrow">
             <a href="/">Home</a>
             <span aria-hidden="true">&gt;</span>
             <span>Discover</span>
@@ -55,13 +57,13 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
             <span aria-current="page">Blog</span>
           </nav>
           <div className="blog-hero__content">
-            <h1 data-reveal="text" data-reveal-delay="1" id="blog-heading">
-              Find our all blogs from here
+            <h1 data-reveal="lines" id="blog-heading">
+              <RevealLines text="Find our all blogs from here" />
             </h1>
-            <p data-reveal="up" data-reveal-delay="2">
+            <p data-reveal="rise">
               Our latest articles on mentorships, learning and development, employee retention
             </p>
-            <label className="blog-search" data-reveal="up" data-reveal-delay="3">
+            <label className="blog-search" data-reveal="rise">
               <span className="sr-only">Search blogs</span>
               <SearchIcon />
               <input
@@ -80,7 +82,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
 
       <section className="blog-content" aria-labelledby="recent-posts-heading">
         <div className="blog-content__inner">
-          <div className="blog-toolbar" data-reveal="up">
+          <div className="blog-toolbar" data-reveal="rise">
             <div className="blog-categories" aria-label="Filter blog categories">
               <span>categories</span>
               {categories.map((category) => {
@@ -89,6 +91,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
                 return (
                   <button
                     aria-pressed={isSelected}
+                    data-boom-click=""
                     key={category}
                     onClick={() => {
                       setSelectedCategory(isSelected ? null : category);
@@ -105,6 +108,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
             <a
               aria-label="Follow Canada School of Leadership on LinkedIn"
               className="blog-linkedin"
+              data-boom-click=""
               href="https://www.linkedin.com"
               rel="noreferrer"
               target="_blank"
@@ -122,13 +126,14 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
 
           <div className="blog-content__columns">
             <div className="blog-posts">
-              <h2 data-reveal="text" id="recent-posts-heading">
+              <h2 data-reveal="rise" id="recent-posts-heading">
                 Our Recent Post
               </h2>
               {visiblePosts.length > 0 ? (
-                <div className="blog-posts__grid">
+                // Keyed by category so switching filters replays the card entrance for every result.
+                <div className="blog-posts__grid" key={selectedCategory ?? "all"}>
                   {visiblePosts.map((post, index) => (
-                    <BlogCard key={post.id} post={post} revealDelay={(index % 3) + 1} />
+                    <BlogCard key={post.id} post={post} revealDelay={index % 3} />
                   ))}
                 </div>
               ) : (
@@ -138,6 +143,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
               {filteredPosts.length > 6 ? (
                 <button
                   className="blog-view-more"
+                  data-boom-click=""
                   onClick={() => setShowAll((current) => !current)}
                   type="button"
                 >
@@ -150,6 +156,9 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
               onSubmit={(event) => {
                 event.preventDefault();
                 setSubmitted(true);
+
+                const submitButton = event.currentTarget.querySelector('button[type="submit"]');
+                if (submitButton) spawnBoomBurstFrom(submitButton, { variant: "confetti" });
               }}
               submitted={submitted}
             />

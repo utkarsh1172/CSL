@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getBlogPostBySlug, getBlogPostSlugs } from "@/content/blog";
+import { getBlogPostBySlug, getBlogPostSlugs, getRelatedBlogPosts } from "@/content/blog";
 import { BlogArticle } from "@/features/blog/components/BlogArticle";
 
 type BlogArticleRouteProps = {
@@ -41,5 +41,5 @@ export default async function BlogArticleRoute({ params }: BlogArticleRouteProps
     notFound();
   }
 
-  return <BlogArticle post={post} />;
+  return <BlogArticle post={post} relatedPosts={getRelatedBlogPosts(post.slug)} />;
 }

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { spawnBoomBurstFrom } from "@/utils/boom-burst";
+
 export function BlogAdvisorForm() {
   const [submitted, setSubmitted] = useState(false);
 
@@ -9,7 +11,7 @@ export function BlogAdvisorForm() {
     <aside
       aria-labelledby="article-advisor-heading"
       className="article-advisor"
-      data-reveal="left"
+      data-reveal="card"
       data-reveal-delay="2"
     >
       <p className="article-advisor__eyebrow">Get Started</p>
@@ -22,6 +24,9 @@ export function BlogAdvisorForm() {
         onSubmit={(event) => {
           event.preventDefault();
           setSubmitted(true);
+
+          const submitButton = event.currentTarget.querySelector('button[type="submit"]');
+          if (submitButton) spawnBoomBurstFrom(submitButton, { variant: "confetti" });
         }}
       >
         <label className="sr-only" htmlFor="article-advisor-name">

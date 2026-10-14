@@ -10,7 +10,7 @@ export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
     <aside
       aria-labelledby="advisor-heading"
       className="advisor-card"
-      data-reveal="left"
+      data-reveal="card"
       data-reveal-delay="2"
     >
       <p className="advisor-card__eyebrow">Get Started</p>

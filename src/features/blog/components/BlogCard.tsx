@@ -10,11 +10,11 @@ type BlogCardProps = {
 
 export function BlogCard({ post, revealDelay = 0 }: BlogCardProps) {
   return (
-    <article className="blog-card" data-reveal="up" data-reveal-delay={revealDelay}>
-      <Link aria-label={`Read more about ${post.title}`} href={post.href}>
+    <article className="blog-card" data-reveal="card" data-reveal-delay={revealDelay}>
+      <Link aria-label={`Read more about ${post.title}`} data-boom-click="" href={post.href}>
         <div className="blog-card__media">
           <Image
-            alt="Business leaders discussing a next-generation business solution"
+            alt={post.imageAlt}
             height={409}
             sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1080px) 45vw, 230px"
             src={post.imageSrc}
