@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BoomCounter } from "@/components/ui/BoomCounter";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { RevealLines } from "@/components/ui/RevealLines";
 import type { BlogContentSection, BlogPostDetail, RelatedBlogPost } from "@/types/blog";
 
@@ -270,14 +271,7 @@ export function BlogArticle({ post, relatedPosts }: BlogArticleProps) {
                 >
                   <h2 id="article-faq-heading">FAQ</h2>
                   <p>{post.faqIntro}</p>
-                  <div>
-                    {post.faqs.map((faq, index) => (
-                      <details key={faq.question} open={index === 0}>
-                        <summary>{faq.question}</summary>
-                        <p>{faq.answer}</p>
-                      </details>
-                    ))}
-                  </div>
+                  <FaqAccordion items={post.faqs} variant="compact" />
                 </section>
 
                 <aside aria-label="About the author" className="article-author" data-reveal="card">

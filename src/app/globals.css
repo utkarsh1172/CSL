@@ -2194,42 +2194,6 @@ a {
   margin: 0 0 15px;
 }
 
-.article-faq details {
-  border-bottom: 1px solid #a7a59f;
-}
-
-.article-faq summary {
-  position: relative;
-  padding: 14px 28px 14px 0;
-  list-style: none;
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.article-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.article-faq summary::after {
-  position: absolute;
-  top: 12px;
-  right: 5px;
-  content: "+";
-  font-size: 1rem;
-}
-
-.article-faq details[open] summary::after {
-  content: "−";
-}
-
-.article-faq details p {
-  margin: -4px 30px 14px 0;
-  color: #363a42;
-  font-size: 0.74rem;
-  line-height: 1.45;
-}
-
 .article-author {
   display: grid;
   grid-template-columns: minmax(195px, 0.85fr) 28px minmax(0, 1.4fr);
@@ -2855,7 +2819,6 @@ a {
 .article-advisor button[type="submit"],
 .article-cta a,
 .article-share a,
-.article-faq summary::after,
 .related-blogs a svg {
   transition:
     color 220ms ease,
@@ -2867,10 +2830,6 @@ a {
 .article-hero img {
   animation: csl-image-settle 1100ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
   transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.article-faq summary {
-  transition: color 220ms ease, padding-left 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) {
@@ -2978,18 +2937,6 @@ a {
     transform: translateY(-2px);
   }
 
-  .article-faq summary:hover,
-  .article-faq summary:focus-visible {
-    color: #075fdd;
-    padding-left: 7px;
-    outline: none;
-  }
-
-  .article-faq summary:hover::after,
-  .article-faq summary:focus-visible::after {
-    transform: rotate(90deg);
-  }
-
   .related-blogs a:hover svg,
   .related-blogs a:focus-visible svg {
     transform: translateX(4px);
@@ -3008,7 +2955,6 @@ a {
 .advisor-card button[type="submit"]:focus-visible,
 .article-advisor button[type="submit"]:focus-visible,
 .article-cta a:focus-visible,
-.article-faq summary:focus-visible,
 .related-blogs a:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
@@ -3294,6 +3240,190 @@ a {
     opacity: 1 !important;
     rotate: 0deg !important;
     translate: 0 0 !important;
+  }
+}
+
+/* FAQ accordion (src/components/ui/FaqAccordion.tsx), modelled on the leadershipprograms.ca Q&A.
+   Answers animate between 0fr and 1fr grid rows, so they glide to their natural height in every
+   modern browser. Opening and closing share one size timing, so when one answer hands over to
+   another the list below stays put; only the fade differs (out fast, in after a beat). */
+.faq-accordion {
+  --faq-royal: #1a48bc;
+  --faq-accent: #dde8ff;
+  --faq-line: rgba(197, 203, 210, 0.7);
+  --faq-muted: #515962;
+  --faq-icon-size: 24px;
+  --faq-line-height: 1.4;
+  --faq-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --faq-size-duration: 420ms;
+  border-top: 1px solid var(--faq-line);
+}
+
+.faq-accordion__item {
+  border-bottom: 1px solid var(--faq-line);
+}
+
+.faq-accordion__heading {
+  margin: 0;
+  font: inherit;
+}
+
+.faq-accordion__trigger {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  font: inherit;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.06rem, 1rem + 0.3vw, 1.25rem);
+  font-weight: 700;
+  line-height: var(--faq-line-height);
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.faq-accordion__question {
+  min-width: 0;
+  transition: color 220ms ease;
+}
+
+.faq-accordion__icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: var(--faq-icon-size);
+  height: var(--faq-icon-size);
+  /* Centres the circle on the question's first line at any text size. */
+  margin-top: max(0px, calc((var(--faq-line-height) * 1em - var(--faq-icon-size)) / 2));
+  place-items: center;
+  color: var(--faq-royal);
+  border: 1px solid rgba(26, 72, 188, 0.5);
+  border-radius: 50%;
+  transition:
+    color 300ms var(--faq-ease),
+    background-color 300ms var(--faq-ease),
+    border-color 300ms var(--faq-ease),
+    rotate var(--faq-size-duration) var(--faq-ease),
+    scale 200ms var(--faq-ease);
+}
+
+.faq-accordion__icon svg {
+  width: 42%;
+  height: 42%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.7;
+}
+
+/* The plus turns 45deg into a close mark on a filled royal disc. */
+.faq-accordion__trigger[aria-expanded="true"] .faq-accordion__icon {
+  color: var(--white);
+  background-color: var(--faq-royal);
+  border-color: var(--faq-royal);
+  rotate: 45deg;
+}
+
+.faq-accordion__trigger:active .faq-accordion__icon {
+  scale: 0.9;
+}
+
+.faq-accordion__trigger:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.faq-accordion__trigger:focus-visible .faq-accordion__question {
+  color: var(--faq-royal);
+}
+
+.faq-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--faq-size-duration) var(--faq-ease),
+    margin-top var(--faq-size-duration) var(--faq-ease),
+    opacity 180ms ease;
+}
+
+/* Pulling the open answer up 8px leaves a 12px gap under the question, as on the reference site. */
+.faq-accordion__item[data-open] .faq-accordion__panel {
+  grid-template-rows: 1fr;
+  margin-top: -8px;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--faq-size-duration) var(--faq-ease),
+    margin-top var(--faq-size-duration) var(--faq-ease),
+    opacity 360ms var(--faq-ease) 60ms;
+}
+
+.faq-accordion__body {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-accordion__answer {
+  max-width: 70ch;
+  margin: 0;
+  padding: 0 0 22px;
+  color: var(--faq-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  translate: 0 -6px;
+  transition: translate var(--faq-size-duration) var(--faq-ease);
+}
+
+.faq-accordion__item[data-open] .faq-accordion__answer {
+  translate: 0 0;
+}
+
+/* Smaller type for FAQs that sit inside article copy. */
+.faq-accordion--compact {
+  --faq-icon-size: 20px;
+  --faq-line-height: 1.45;
+}
+
+.faq-accordion--compact .faq-accordion__trigger {
+  gap: 16px;
+  padding: 14px 0;
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+.faq-accordion--compact .faq-accordion__item[data-open] .faq-accordion__panel {
+  margin-top: -6px;
+}
+
+.faq-accordion--compact .faq-accordion__answer {
+  padding-bottom: 16px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+@media (hover: hover) {
+  .faq-accordion__trigger:hover .faq-accordion__question {
+    color: var(--faq-royal);
+  }
+
+  .faq-accordion__trigger[aria-expanded="false"]:hover .faq-accordion__icon {
+    background-color: var(--faq-accent);
+    border-color: var(--faq-royal);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-accordion__panel,
+  .faq-accordion__item[data-open] .faq-accordion__panel,
+  .faq-accordion__answer,
+  .faq-accordion__icon {
+    transition: none;
   }
 }
 
@@ -4498,72 +4628,6 @@ a {
   margin-top: 40px;
 }
 
-.contact-faq details {
-  border-bottom: 1px solid #77756f;
-}
-
-.contact-faq summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 19px 0;
-  color: #0b0d12;
-  cursor: pointer;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.02rem;
-  font-weight: 700;
-  list-style: none;
-  transition:
-    color 220ms ease,
-    padding-left 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.contact-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.contact-faq summary svg {
-  flex: 0 0 auto;
-  width: 12px;
-  height: 8px;
-  margin-right: 14px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  transition: rotate 300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.contact-faq details[open] summary svg {
-  rotate: 180deg;
-}
-
-.contact-faq details p {
-  margin: -6px 0 19px;
-  color: #22252b;
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-/* Smoothly size answers open and closed where the browser can animate to auto. */
-@supports (interpolate-size: allow-keywords) {
-  .contact-faq__list {
-    interpolate-size: allow-keywords;
-  }
-
-  .contact-faq details::details-content {
-    block-size: 0;
-    overflow: clip;
-    transition:
-      block-size 420ms cubic-bezier(0.22, 1, 0.36, 1),
-      content-visibility 420ms allow-discrete;
-  }
-
-  .contact-faq details[open]::details-content {
-    block-size: auto;
-  }
-}
-
 .contact-faq__more {
   display: block;
   min-width: 228px;
@@ -4582,7 +4646,6 @@ a {
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.contact-faq summary:focus-visible,
 .contact-faq__more:focus-visible,
 .lead-form--light button:focus-visible {
   outline: 2px solid var(--blue);
@@ -4650,11 +4713,6 @@ a {
 
   .world-map__region:not([aria-pressed="true"]):hover {
     background: var(--gradient-card-hover);
-  }
-
-  .contact-faq summary:hover {
-    color: #075fdd;
-    padding-left: 7px;
   }
 
   .contact-faq__more:hover {
@@ -4793,10 +4851,6 @@ a {
 
   .world-map__tag {
     font-size: 0.58rem;
-  }
-
-  .contact-faq summary {
-    font-size: 0.96rem;
   }
 }
 
@@ -5171,10 +5225,6 @@ a {
   }
 
   .flip-card__inner {
-    transition: none;
-  }
-
-  .contact-faq details::details-content {
     transition: none;
   }
 }

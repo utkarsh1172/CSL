@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import type { ContactFaq as ContactFaqItem } from "@/content/pages/contact";
 
 import { ContactSectionHeading } from "./ContactSectionHeading";
@@ -11,14 +12,6 @@ const initialCount = 5;
 type ContactFaqProps = {
   faqs: ContactFaqItem[];
 };
-
-function ChevronIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 12 8">
-      <path d="M1 1.25 6 6.25l5-5" />
-    </svg>
-  );
-}
 
 export function ContactFaq({ faqs }: ContactFaqProps) {
   const [showAll, setShowAll] = useState(false);
@@ -35,17 +28,7 @@ export function ContactFaq({ faqs }: ContactFaqProps) {
         />
 
         {/* ScrollReveal staggers each item in, including ones added by "View More". */}
-        <div className="contact-faq__list" data-reveal-children="">
-          {visibleFaqs.map((faq, index) => (
-            <details key={faq.question} name="contact-faq" open={index === 0}>
-              <summary>
-                {faq.question}
-                <ChevronIcon />
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
-        </div>
+        <FaqAccordion className="contact-faq__list" data-reveal-children="" items={visibleFaqs} />
 
         {faqs.length > initialCount ? (
           <button
