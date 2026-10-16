@@ -1,16 +1,15 @@
 import Link from "next/link";
 
-import { RevealLines } from "@/components/ui/RevealLines";
-
-import { ContactSectionHeading } from "./ContactSectionHeading";
-import { LeadForm } from "./LeadForm";
+import { LeadForm } from "@/components/forms/LeadForm";
+import { LeadCard } from "@/components/sections/LeadCard";
+import { SectionHeading } from "@/components/sections/SectionHeading";
 
 export function ContactAdvisorSection() {
   return (
     <section aria-labelledby="two-systems-heading" className="contact-advisor" id="talk-to-advisor">
-      <div className="contact-shell contact-advisor__inner">
+      <div className="section-shell contact-advisor__inner">
         <div className="contact-advisor__copy">
-          <ContactSectionHeading
+          <SectionHeading
             accent="One works."
             align="start"
             eyebrow="Get in Touch"
@@ -32,25 +31,13 @@ export function ContactAdvisorSection() {
           </div>
         </div>
 
-        <aside
-          aria-labelledby="contact-advisor-heading"
-          className="contact-advisor__card"
-          data-reveal="card"
-          data-reveal-delay="2"
-        >
-          <p className="contact-advisor__eyebrow">Get Started</p>
-          <h2 data-reveal="lines" id="contact-advisor-heading">
-            <RevealLines text="Explore the" />{" "}
-            <span className="contact-heading__accent">
-              <RevealLines text="AI Leadership program" />
-            </span>
-          </h2>
+        <LeadCard accent="AI Leadership program" headingId="contact-advisor-heading" title="Explore the">
           <LeadForm
             className="lead-form lead-form--light"
             idPrefix="contact-advisor"
             submitLabel="Talk to an Advisor"
           />
-        </aside>
+        </LeadCard>
       </div>
     </section>
   );

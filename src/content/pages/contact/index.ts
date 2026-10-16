@@ -1,3 +1,5 @@
+import type { FaqItem } from "@/types/content";
+
 export const contactDetails = {
   email: "info@zoclearnings.com",
   phoneLabel: "Canada +1 6812 026 094",
@@ -16,24 +18,6 @@ export const contactHero = {
   imageSrc: "/images/pages/blog/cybersecurity-leadership-for-executives.jpg",
   imageAlt: "Technology leaders walking through a modern office corridor",
 } as const;
-
-/**
- * Typographic wordmarks; swap each for the organisation's approved logo file when available.
- * The sector line shows on the back of each flip card.
- */
-export const spotlightBrands = [
-  { name: "Orion Health", mark: "ORION", sub: "HEALTH", tone: "orion", sector: "Healthcare technology" },
-  { name: "Rogers", mark: "ROGERS", tone: "rogers", sector: "Telecommunications & media" },
-  { name: "Scotiabank", mark: "Scotiabank", tone: "scotiabank", sector: "Banking & financial services" },
-  { name: "Kyndryl", mark: "kyndryl", tone: "kyndryl", sector: "IT infrastructure services" },
-  {
-    name: "TCS Connected IT",
-    mark: "TCS",
-    sub: "Connected IT",
-    tone: "tcs",
-    sector: "IT services & consulting",
-  },
-] as const;
 
 export type PartnerRegion = {
   id: string;
@@ -98,12 +82,7 @@ export const partnerRegions: PartnerRegion[] = [
   },
 ];
 
-export type ContactFaq = {
-  question: string;
-  answer: string;
-};
-
-export const contactFaqs: ContactFaq[] = [
+export const contactFaqs: FaqItem[] = [
   {
     question: "Is this an AI technical certification?",
     answer:

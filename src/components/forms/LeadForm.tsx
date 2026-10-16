@@ -6,11 +6,13 @@ type LeadFormProps = {
   /** Prefix for field ids, so several lead forms can share a page. */
   idPrefix: string;
   submitLabel: string;
+  /** Adds a free-text message field below the email. */
+  withMessage?: boolean;
   className?: string;
 };
 
-/** Name and email capture used by the advisor card and the franchise banner. */
-export function LeadForm({ idPrefix, submitLabel, className }: LeadFormProps) {
+/** Name and email capture used by advisor cards and banners across pages. */
+export function LeadForm({ idPrefix, submitLabel, withMessage = false, className }: LeadFormProps) {
   const { submitted, handleSubmit } = useSubmitBurst();
 
   return (
@@ -37,6 +39,15 @@ export function LeadForm({ idPrefix, submitLabel, className }: LeadFormProps) {
         required
         type="email"
       />
+
+      {withMessage ? (
+        <>
+          <label className="sr-only" htmlFor={`${idPrefix}-message`}>
+            Message
+          </label>
+          <textarea id={`${idPrefix}-message`} name="message" placeholder="Message" rows={4} />
+        </>
+      ) : null}
 
       <button type="submit">{submitted ? "Request Received" : submitLabel}</button>
       <p className="lead-form__status" role="status">

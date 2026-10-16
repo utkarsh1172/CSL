@@ -1,9 +1,8 @@
 import Image from "next/image";
 
+import { SectionHeading } from "@/components/sections/SectionHeading";
 import { CanadaFlag } from "@/components/ui/CanadaFlag";
 import { contactDetails } from "@/content/pages/contact";
-
-import { ContactSectionHeading } from "./ContactSectionHeading";
 
 function PhoneIcon() {
   return (
@@ -28,12 +27,12 @@ export function ContactDetails() {
 
   return (
     <section aria-labelledby="contact-details-heading" className="contact-details">
-      <div className="contact-shell contact-details__inner">
-        <ContactSectionHeading
+      <div className="section-shell contact-details__inner">
+        <SectionHeading
           description="Most professionals focus on acquiring skills. CSL builds the capital that compounds beyond a single job title."
           eyebrow={
             <>
-              <CanadaFlag className="contact-heading__flag" />
+              <CanadaFlag className="section-heading__flag" />
               Contact Us
             </>
           }

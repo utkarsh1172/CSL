@@ -18,3 +18,17 @@ export type StudyBlogAuthor = {
   avatar: string
   bio?: string
 }
+export type FaqItem = {
+  question: string
+  answer: string
+}
+
+export type IndustryBrand = {
+  name: string
+  /** Typographic wordmark shown in place of the organisation's logo file. */
+  mark: string
+  sub?: string
+  /** Picks the wordmark's styling: `brand-wordmark--${tone}`. */
+  tone: "orion" | "rogers" | "scotiabank" | "kyndryl" | "tcs"
+  sector: string
+}

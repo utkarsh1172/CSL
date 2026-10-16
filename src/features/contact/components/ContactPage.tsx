@@ -1,10 +1,10 @@
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { contactFaqs } from "@/content/pages/contact";
 
 import { ContactAdvisorSection } from "./ContactAdvisorSection";
 import { ContactDetails } from "./ContactDetails";
-import { ContactFaq } from "./ContactFaq";
 import { ContactHero } from "./ContactHero";
 import { FranchiseSection } from "./FranchiseSection";
 import { PartnerMapSection } from "./PartnerMapSection";
@@ -21,7 +21,7 @@ export function ContactPage() {
         <FranchiseSection />
         <SpotlightSection />
         <PartnerMapSection />
-        <ContactFaq faqs={contactFaqs} />
+        <FaqSection faqs={contactFaqs} idPrefix="contact" />
       </main>
       <SiteFooter />
     </>

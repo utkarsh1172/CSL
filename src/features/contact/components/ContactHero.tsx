@@ -45,7 +45,7 @@ export function ContactHero() {
             </span>{" "}
             {/* One rising unit, so the gradient sweeps across the whole phrase rather than per word. */}
             <span className="contact-hero__line">
-              <span className="reveal-word contact-hero__gradient-text">{contactHero.accent}</span>
+              <span className="reveal-word text-gradient-sweep">{contactHero.accent}</span>
             </span>
           </h1>
 
