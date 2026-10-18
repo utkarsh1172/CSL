@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
-
 import { PhoneField } from "@/components/forms/PhoneField";
-import { spawnBoomBurstFrom } from "@/utils/boom-burst";
+import { leadButtonLabel, leadStatusMessage, useLeadForm } from "@/hooks/useLeadForm";
 
 export function BlogAdvisorForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const { status, handleSubmit, handleFocus } = useLeadForm("blog-article-advisor");
 
   return (
     <aside
@@ -21,15 +19,7 @@ export function BlogAdvisorForm() {
         Speak with a program advisor about the curriculum, learning model, eligibility and fit
         for your leadership journey.
       </p>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSubmitted(true);
-
-          const submitButton = event.currentTarget.querySelector('button[type="submit"]');
-          if (submitButton) spawnBoomBurstFrom(submitButton, { variant: "confetti" });
-        }}
-      >
+      <form onFocus={handleFocus} onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="article-advisor-name">
           Full name
         </label>
@@ -53,9 +43,11 @@ export function BlogAdvisorForm() {
         </label>
         <textarea id="article-advisor-message" name="message" placeholder="Message" rows={4} />
 
-        <button type="submit">{submitted ? "Request Received" : "Talk to an Advisor"}</button>
-        <p className="article-advisor__status" role="status">
-          {submitted ? "Thank you. An advisor will be in touch." : ""}
+        <button disabled={status === "sending"} type="submit">
+          {leadButtonLabel(status, "Talk to an Advisor")}
+        </button>
+        <p className="article-advisor__status" data-status={status} role="status">
+          {leadStatusMessage(status, "Thank you. An advisor will be in touch.")}
         </p>
       </form>
     </aside>

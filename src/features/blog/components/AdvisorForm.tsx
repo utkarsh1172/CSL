@@ -1,13 +1,11 @@
-import type { FormEvent } from "react";
+"use client";
 
 import { PhoneField } from "@/components/forms/PhoneField";
+import { leadButtonLabel, leadStatusMessage, useLeadForm } from "@/hooks/useLeadForm";
 
-type AdvisorFormProps = {
-  submitted: boolean;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-};
+export function AdvisorForm() {
+  const { status, handleSubmit, handleFocus } = useLeadForm("blog-directory-advisor");
 
-export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
   return (
     <aside
       aria-labelledby="advisor-heading"
@@ -21,7 +19,7 @@ export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
         Speak with a program advisor about the curriculum, learning model, eligibility and fit
         for your leadership journey.
       </p>
-      <form id="advisor-form" onSubmit={onSubmit}>
+      <form id="advisor-form" onFocus={handleFocus} onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="advisor-name">
           Full name
         </label>
@@ -39,9 +37,11 @@ export function AdvisorForm({ submitted, onSubmit }: AdvisorFormProps) {
         </label>
         <textarea id="advisor-message" name="message" placeholder="Message" rows={4} />
 
-        <button type="submit">{submitted ? "Request Received" : "Talk to an Advisor"}</button>
-        <p className="advisor-card__status" role="status">
-          {submitted ? "Thank you. An advisor will be in touch." : ""}
+        <button disabled={status === "sending"} type="submit">
+          {leadButtonLabel(status, "Talk to an Advisor")}
+        </button>
+        <p className="advisor-card__status" data-status={status} role="status">
+          {leadStatusMessage(status, "Thank you. An advisor will be in touch.")}
         </p>
       </form>
     </aside>

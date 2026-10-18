@@ -4,7 +4,7 @@ import { useState, type CSSProperties } from "react";
 
 import { BoomCounter } from "@/components/ui/BoomCounter";
 import { LineIcon } from "@/components/ui/LineIcon";
-import type { LeadershipCapital } from "@/types/program";
+import type { LeadershipCapital } from "@/types/about";
 
 type CapitalBoardProps = {
   coreLabel: string;

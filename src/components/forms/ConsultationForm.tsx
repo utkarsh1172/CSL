@@ -1,15 +1,16 @@
 "use client";
 
 import { CanadaFlag } from "@/components/ui/CanadaFlag";
-import { useSubmitBurst } from "@/hooks/useSubmitBurst";
+import { leadButtonLabel, leadStatusMessage, useLeadForm } from "@/hooks/useLeadForm";
 
 export function ConsultationForm() {
-  const { submitted, handleSubmit } = useSubmitBurst();
+  const { status, handleSubmit, handleFocus } = useLeadForm("footer-consultation");
 
   return (
     <form
       aria-labelledby="footer-consultation-heading"
       className="consultation-form"
+      onFocus={handleFocus}
       onSubmit={handleSubmit}
     >
       <h2 id="footer-consultation-heading">
@@ -60,9 +61,11 @@ export function ConsultationForm() {
         />
       </div>
 
-      <button type="submit">{submitted ? "Request Received" : "Request Connect"}</button>
-      <p className="consultation-form__status" role="status">
-        {submitted ? "Thank you. We will be in touch shortly." : ""}
+      <button disabled={status === "sending"} type="submit">
+        {leadButtonLabel(status, "Request Connect")}
+      </button>
+      <p className="consultation-form__status" data-status={status} role="status">
+        {leadStatusMessage(status, "Thank you. We will be in touch shortly.")}
       </p>
     </form>
   );

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import type { FaqItem } from "@/types/content";
 
 import { SectionHeading } from "./SectionHeading";
 
 type FaqSectionProps = {
   faqs: FaqItem[];
-  /** Prefix for the heading id and the accordion group name, so the section stays unique. */
+  /** Prefix for the heading id, so the section stays unique on the page. */
   idPrefix: string;
   eyebrow?: string;
   title?: string;
@@ -16,16 +17,10 @@ type FaqSectionProps = {
   align?: "center" | "start";
   /** Questions shown before "View More". */
   initialCount?: number;
+  /** Anchor id for the section; pages with two FAQ lists give the second its own. */
+  sectionId?: string;
   className?: string;
 };
-
-function ChevronIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 12 8">
-      <path d="M1 1.25 6 6.25l5-5" />
-    </svg>
-  );
-}
 
 /** Accordion of questions; one answer opens at a time and the rest wait behind "View More". */
 export function FaqSection({
@@ -36,6 +31,7 @@ export function FaqSection({
   accent = "Canada School of Leadership (CSL)",
   align = "center",
   initialCount = 5,
+  sectionId = "faqs",
   className,
 }: FaqSectionProps) {
   const [showAll, setShowAll] = useState(false);
@@ -46,23 +42,13 @@ export function FaqSection({
     <section
       aria-labelledby={headingId}
       className={`faq-section faq-section--${align}${className ? ` ${className}` : ""}`}
-      id="faqs"
+      id={sectionId}
     >
       <div className="section-shell faq-section__inner">
         <SectionHeading accent={accent} align={align} eyebrow={eyebrow} id={headingId} title={title} />
 
         {/* ScrollReveal staggers each item in, including ones added by "View More". */}
-        <div className="faq-section__list" data-reveal-children="">
-          {visibleFaqs.map((faq, index) => (
-            <details key={faq.question} name={`${idPrefix}-faq`} open={index === 0}>
-              <summary>
-                {faq.question}
-                <ChevronIcon />
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
-        </div>
+        <FaqAccordion className="faq-section__list" data-reveal-children="" items={visibleFaqs} />
 
         {faqs.length > initialCount ? (
           <button

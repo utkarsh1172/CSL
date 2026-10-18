@@ -3,68 +3,67 @@ import Link from "next/link";
 
 import { BoomCounter } from "@/components/ui/BoomCounter";
 import { RevealLines } from "@/components/ui/RevealLines";
-import type { ProgramHero as ProgramHeroContent } from "@/types/program";
+import type { Program } from "@/types/program";
 
 type ProgramHeroProps = {
-  hero: ProgramHeroContent;
+  hero: Program["hero"];
 };
 
 export function ProgramHero({ hero }: ProgramHeroProps) {
   return (
     <section aria-labelledby="program-heading" className="program-hero">
+      {/* A slow-drifting glow and grid give the dark backdrop a live, technical feel. */}
+      <div aria-hidden="true" className="program-hero__backdrop" />
       <div className="program-hero__visual">
-        <Image alt={hero.imageAlt} fill priority sizes="100vw" src={hero.imageSrc} />
+        <Image alt={hero.imageAlt} fill priority sizes="(max-width: 900px) 100vw, 50vw" src={hero.imageSrc} />
       </div>
 
       <div className="section-shell program-hero__inner">
-        <div className="program-hero__content">
-          <p className="program-hero__eyebrow" data-reveal="eyebrow">
-            {hero.eyebrow}
-          </p>
+        <p className="program-hero__eyebrow" data-reveal="eyebrow">
+          {hero.eyebrow}
+        </p>
 
-          <h1 data-reveal="lines" id="program-heading">
-            <span className="program-hero__line">
-              <RevealLines text={hero.title} />
-            </span>{" "}
-            {/* One rising unit, so the gradient sweeps across the whole phrase rather than per word. */}
-            <span className="program-hero__line">
-              <span className="reveal-word text-gradient-sweep program-hero__accent">{hero.accent}</span>
-            </span>
-          </h1>
+        <h1 data-reveal="lines" id="program-heading">
+          <span className="program-hero__line">
+            <RevealLines text={hero.title} />
+          </span>{" "}
+          {/* One rising unit, so the gradient sweeps across the whole phrase rather than per word. */}
+          <span className="program-hero__line">
+            <span className="reveal-word text-gradient-sweep program-hero__accent">{hero.accent}</span>
+          </span>
+        </h1>
 
-          <p className="program-hero__summary" data-reveal="rise">
-            {hero.summary}
-          </p>
-          <p className="program-hero__statement" data-reveal="rise">
-            {hero.statement}
-          </p>
+        <p className="program-hero__summary" data-reveal="rise">
+          {hero.summary}
+        </p>
 
-          <div className="program-hero__actions" data-reveal="rise">
-            <p className="program-hero__rating">
-              *Rated <BoomCounter value={hero.rating} />
-            </p>
-            <div>
-              <Link className="button button--primary" data-boom-click="" href="/contact">
-                Start Your Journey
-              </Link>
-              <a className="button button--light" data-boom-click="" href="#talk-to-advisor">
-                Schedule a Free Call
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Each figure counts up once the panel is in view. */}
-        <dl className="program-hero__stats" data-reveal="left" data-reveal-delay="4">
+        <dl className="program-hero__stats" data-reveal="rise">
           {hero.stats.map((stat) => (
             <div key={stat.label}>
-              <dt>{stat.label}</dt>
-              <dd>
-                <BoomCounter value={stat.value} />
-              </dd>
+              <dt>
+                <span className="program-hero__stat-value">
+                  <BoomCounter value={stat.value} />
+                </span>
+                <span className="program-hero__stat-label">{stat.label}</span>
+              </dt>
+              <dd>{stat.detail}</dd>
             </div>
           ))}
         </dl>
+
+        <div className="program-hero__actions" data-reveal="rise">
+          <p className="program-hero__rating">
+            *Rated <BoomCounter value={hero.rating} />
+          </p>
+          <div>
+            <Link className="button button--primary" data-boom-click="" href="/contact">
+              Start Your Journey
+            </Link>
+            <a className="button button--light" data-boom-click="" href="#talk-to-advisor">
+              Schedule a Free Call
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

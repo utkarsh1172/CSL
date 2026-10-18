@@ -32,3 +32,26 @@ export type IndustryBrand = {
   tone: "orion" | "rogers" | "scotiabank" | "kyndryl" | "tcs"
   sector: string
 }
+
+/** Two-tone heading copy: `title` renders in ink, `accent` in brand blue. */
+export type HeadingContent = {
+  eyebrow?: string
+  title: string
+  accent?: string
+  description?: string
+}
+
+export type Testimonial = {
+  quote: string
+  name: string
+  role: string
+  organization: string
+  region: string
+}
+
+export type Mentor = {
+  name: string
+  role: string
+  /** Where "View profile" leads; the advisor form until mentor profiles exist. */
+  profileHref: string
+}

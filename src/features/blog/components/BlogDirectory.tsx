@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 
 import { RevealLines } from "@/components/ui/RevealLines";
 import type { BlogPostSummary } from "@/types/blog";
-import { spawnBoomBurstFrom } from "@/utils/boom-burst";
 
 import { AdvisorForm } from "./AdvisorForm";
 import { BlogCard } from "./BlogCard";
@@ -28,7 +27,6 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const filteredPosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -152,16 +150,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
               ) : null}
             </div>
 
-            <AdvisorForm
-              onSubmit={(event) => {
-                event.preventDefault();
-                setSubmitted(true);
-
-                const submitButton = event.currentTarget.querySelector('button[type="submit"]');
-                if (submitButton) spawnBoomBurstFrom(submitButton, { variant: "confetti" });
-              }}
-              submitted={submitted}
-            />
+            <AdvisorForm />
           </div>
         </div>
       </section>

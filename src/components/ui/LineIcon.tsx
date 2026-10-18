@@ -102,6 +102,24 @@ const iconPaths: Record<LineIconName, ReactNode> = {
       <path d="m11 13 7-7M15.5 6.5V4l3-1v2.5h2.5l-1 3h-2.5" />
     </>
   ),
+  "trend-down": (
+    <>
+      <path d="m3 7 6.5 6.5 4-4L21 17" />
+      <path d="M15 17h6v-6" />
+    </>
+  ),
+  "trend-up": (
+    <>
+      <path d="m3 17 6.5-6.5 4 4L21 7" />
+      <path d="M15 7h6v6" />
+    </>
+  ),
+  user: (
+    <>
+      <circle cx="12" cy="8.5" r="3.8" />
+      <path d="M4.5 20.5c.8-4.1 3.6-6.6 7.5-6.6s6.7 2.5 7.5 6.6" />
+    </>
+  ),
   users: (
     <>
       <circle cx="9" cy="8" r="3.3" />

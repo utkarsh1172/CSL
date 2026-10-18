@@ -1,14 +1,25 @@
+import { LeadForm } from "@/components/forms/LeadForm";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { LeadCard } from "@/components/sections/LeadCard";
+import { mentors } from "@/content/shared/mentors";
+import { testimonials } from "@/content/shared/testimonials";
 import type { Program } from "@/types/program";
 
-import { CapitalSection } from "./CapitalSection";
-import { ComparisonSection } from "./ComparisonSection";
-import { EcosystemSection } from "./EcosystemSection";
+import { BenefitsSection } from "./BenefitsSection";
+import { CurriculumSection } from "./CurriculumSection";
+import { DeliverablesSection } from "./DeliverablesSection";
+import { DifferenceSection } from "./DifferenceSection";
+import { FlagshipSection } from "./FlagshipSection";
+import { MentorsSection } from "./MentorsSection";
+import { OverviewSection } from "./OverviewSection";
+import { ProgramCallToAction } from "./ProgramCallToAction";
 import { ProgramHero } from "./ProgramHero";
-import { TrustedSection } from "./TrustedSection";
-import { WhySection } from "./WhySection";
+import { ProgramSubnav } from "./ProgramSubnav";
+import { RecognitionSection } from "./RecognitionSection";
+import { TestimonialsSection } from "./TestimonialsSection";
 
 type ProgramPageProps = {
   program: Program;
@@ -20,17 +31,51 @@ export function ProgramPage({ program }: ProgramPageProps) {
       <SiteHeader />
       <main className="program-page">
         <ProgramHero hero={program.hero} />
-        <CapitalSection advisor={program.advisor} capitals={program.capitals} />
-        <TrustedSection heading={program.trustedBy} />
-        <ComparisonSection comparison={program.comparison} />
-        <EcosystemSection ecosystem={program.ecosystem} />
-        <WhySection why={program.why} />
-        <FaqSection
-          align="start"
-          className="program-section program-section--ruled"
-          faqs={program.faqs}
-          idPrefix="program"
-        />
+        <ProgramSubnav links={program.navigation} />
+        <StickyAsideLayout
+          aside={
+            <LeadCard
+              headingId="program-advisor-heading"
+              intro={program.advisor.intro}
+              title={program.advisor.title}
+              variant="compact"
+            >
+              <LeadForm
+                className="lead-form lead-form--light"
+                idPrefix="program-advisor"
+                submitLabel="Talk to an Advisor"
+                withMessage
+              />
+            </LeadCard>
+          }
+          asideId="talk-to-advisor"
+        >
+          <OverviewSection brochureHref={program.brochureHref} overview={program.overview} />
+          <CurriculumSection curriculum={program.curriculum} />
+          <FlagshipSection flagship={program.flagship} />
+          <DeliverablesSection deliverables={program.deliverables} />
+          <BenefitsSection benefits={program.benefits} />
+          <MentorsSection content={program.mentors} mentors={mentors} />
+          <TestimonialsSection content={program.testimonials} testimonials={testimonials} />
+          <RecognitionSection recognition={program.recognition} />
+          <DifferenceSection difference={program.difference} />
+          <ProgramCallToAction brochureHref={program.brochureHref} callToAction={program.callToAction} />
+          <FaqSection
+            align="start"
+            className="page-section"
+            faqs={program.organisationFaqs}
+            idPrefix="program-csl"
+          />
+          <FaqSection
+            accent="Leadership Program"
+            align="start"
+            className="page-section program-faqs"
+            eyebrow=""
+            faqs={program.faqs}
+            idPrefix="program"
+            sectionId="program-faqs"
+          />
+        </StickyAsideLayout>
       </main>
       <SiteFooter />
     </>

@@ -1,36 +1,36 @@
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { BrandWordmark } from "@/components/ui/BrandWordmark";
+import { Marquee } from "@/components/ui/Marquee";
 import { industryBrands } from "@/content/shared/brands";
-import type { ProgramHeading } from "@/types/program";
+import type { AboutHeading } from "@/types/about";
 
 type TrustedSectionProps = {
-  heading: ProgramHeading;
+  heading: AboutHeading;
 };
 
 export function TrustedSection({ heading }: TrustedSectionProps) {
   return (
     <section
       aria-labelledby="trusted-heading"
-      className="program-section program-section--ruled program-trusted"
+      className="page-section page-section--ruled about-trusted"
     >
       <div className="section-shell">
         <SectionHeading
           accent={heading.accent}
           align="start"
-          className="program-heading"
+          className="section-heading--large"
           id="trusted-heading"
           title={heading.title}
         />
-        <ul className="logo-strip" data-reveal-children="">
-          {industryBrands.map((brand) => (
-            <li key={brand.name}>
-              <span aria-hidden="true">
-                <BrandWordmark brand={brand} />
-              </span>
-              <span className="sr-only">{brand.name}</span>
-            </li>
-          ))}
-        </ul>
+        <Marquee
+          className="logo-strip"
+          items={industryBrands.map((brand) => ({
+            key: brand.name,
+            label: brand.name,
+            node: <BrandWordmark brand={brand} />,
+          }))}
+          label={`${heading.title} ${heading.accent}`}
+        />
       </div>
     </section>
   );

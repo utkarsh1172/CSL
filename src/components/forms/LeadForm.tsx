@@ -1,9 +1,9 @@
 "use client";
 
-import { useSubmitBurst } from "@/hooks/useSubmitBurst";
+import { leadButtonLabel, leadStatusMessage, useLeadForm } from "@/hooks/useLeadForm";
 
 type LeadFormProps = {
-  /** Prefix for field ids, so several lead forms can share a page. */
+  /** Prefix for field ids, so several lead forms can share a page; also names the form in analytics. */
   idPrefix: string;
   submitLabel: string;
   /** Adds a free-text message field below the email. */
@@ -13,10 +13,10 @@ type LeadFormProps = {
 
 /** Name and email capture used by advisor cards and banners across pages. */
 export function LeadForm({ idPrefix, submitLabel, withMessage = false, className }: LeadFormProps) {
-  const { submitted, handleSubmit } = useSubmitBurst();
+  const { status, handleSubmit, handleFocus } = useLeadForm(idPrefix);
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <form className={className} onFocus={handleFocus} onSubmit={handleSubmit}>
       <label className="sr-only" htmlFor={`${idPrefix}-name`}>
         Full name
       </label>
@@ -49,9 +49,11 @@ export function LeadForm({ idPrefix, submitLabel, withMessage = false, className
         </>
       ) : null}
 
-      <button type="submit">{submitted ? "Request Received" : submitLabel}</button>
-      <p className="lead-form__status" role="status">
-        {submitted ? "Thank you. Our team will respond promptly." : ""}
+      <button disabled={status === "sending"} type="submit">
+        {leadButtonLabel(status, submitLabel)}
+      </button>
+      <p className="lead-form__status" data-status={status} role="status">
+        {leadStatusMessage(status, "Thank you. Our team will respond promptly.")}
       </p>
     </form>
   );

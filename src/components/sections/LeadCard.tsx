@@ -9,6 +9,8 @@ type LeadCardProps = {
   accent?: string;
   eyebrow?: string;
   intro?: string;
+  /** "compact" trims padding and type so the card fits a narrow sticky sidebar. */
+  variant?: "default" | "compact";
   className?: string;
   /** The form, usually a LeadForm. */
   children: ReactNode;
@@ -21,13 +23,14 @@ export function LeadCard({
   accent,
   eyebrow = "Get Started",
   intro,
+  variant = "default",
   className,
   children,
 }: LeadCardProps) {
   return (
     <aside
       aria-labelledby={headingId}
-      className={`lead-card${className ? ` ${className}` : ""}`}
+      className={`lead-card lead-card--${variant}${className ? ` ${className}` : ""}`}
       data-reveal="card"
       data-reveal-delay="2"
     >

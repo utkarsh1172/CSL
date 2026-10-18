@@ -15,4 +15,7 @@ export type LineIconName =
   | "star"
   | "sunrise"
   | "target"
+  | "trend-down"
+  | "trend-up"
+  | "user"
   | "users";

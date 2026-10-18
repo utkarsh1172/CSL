@@ -1,21 +1,21 @@
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { LineIcon } from "@/components/ui/LineIcon";
-import type { ProgramEcosystem } from "@/types/program";
+import type { AboutEcosystem } from "@/types/about";
 
 type EcosystemSectionProps = {
-  ecosystem: ProgramEcosystem;
+  ecosystem: AboutEcosystem;
 };
 
 export function EcosystemSection({ ecosystem }: EcosystemSectionProps) {
   const { heading, systems } = ecosystem;
 
   return (
-    <section aria-labelledby="ecosystem-heading" className="program-section program-ecosystem">
+    <section aria-labelledby="ecosystem-heading" className="page-section about-ecosystem">
       <div className="section-shell">
         <SectionHeading
           accent={heading.accent}
           align="start"
-          className="program-heading program-heading--light"
+          className="section-heading--large section-heading--light"
           description={heading.description}
           eyebrow={heading.eyebrow}
           id="ecosystem-heading"

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { AnalyticsTags } from "@/components/layout/AnalyticsTags";
 import { BoomClickEffects } from "@/components/ui/BoomClickEffects";
+import { CtaTracking } from "@/components/ui/CtaTracking";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 import "./globals.css";
@@ -40,6 +42,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body suppressHydrationWarning>
         <ScrollReveal />
         <BoomClickEffects />
+        <CtaTracking />
+        <AnalyticsTags />
         {children}
       </body>
     </html>

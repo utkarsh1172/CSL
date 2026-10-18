@@ -14,9 +14,9 @@ export const footerLinkGroups: NavigationGroup[] = [
     label: "Resources",
     links: [
       { label: "Program Brochures", href: "/resources/brochures" },
-      { label: "Testimonials", href: "/about#testimonials" },
+      { label: "Testimonials", href: "/success-stories#testimonials" },
       { label: "Mentors & Coaches", href: "/about#mentors" },
-      { label: "Case Studies", href: "/resources/case-studies" },
+      { label: "Case Studies", href: "/success-stories#case-studies" },
     ],
   },
 ];
