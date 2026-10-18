@@ -169,6 +169,18 @@ a {
   }
 }
 
+/* A `data-reveal="grow"` box is only a trigger, like a line container: it stays put, and the bars
+   inside wait for it rather than for an outer card that entered view while they were below the fold. */
+.motion-ready [data-reveal="grow"]:not(.is-revealed),
+.motion-ready [data-reveal="grow"].is-revealed {
+  opacity: 1;
+  animation: none;
+}
+
+.motion-ready [data-reveal="grow"]:not(.is-revealed) [data-grow] {
+  animation: none;
+}
+
 @keyframes csl-grow-y {
   from {
     scale: 1 0;
@@ -5867,7 +5879,9 @@ a {
   stroke-width: 1.9;
 }
 
-/* The CSL Leadership Ecosystem: the featured card hands its highlight to whichever is hovered. */
+/* The CSL Leadership Ecosystem: the featured card hands its highlight to whichever is hovered.
+   Each system has its own hue (royal, ocean, indigo), shown as a corner glow at rest and as the
+   full card wash when highlighted. */
 .about-ecosystem {
   padding: 36px 0 64px;
 }
@@ -5883,6 +5897,9 @@ a {
 }
 
 .ecosystem-card {
+  --ecosystem-gradient: linear-gradient(135deg, #1a48bc, #0071d6 60%, #0099e6);
+  --ecosystem-shadow: rgba(26, 72, 188, 0.7);
+
   position: relative;
   isolation: isolate;
   display: flex;
@@ -5903,15 +5920,42 @@ a {
     transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.ecosystem-card:nth-child(2) {
+  --ecosystem-gradient: linear-gradient(135deg, #0070b4, #0094c5 60%, #00b6d1);
+  --ecosystem-shadow: rgba(0, 112, 180, 0.7);
+}
+
+.ecosystem-card:nth-child(3) {
+  --ecosystem-gradient: linear-gradient(135deg, #3d26ae, #3655cd 60%, #2f7fe3);
+  --ecosystem-shadow: rgba(61, 38, 174, 0.7);
+}
+
 .ecosystem-card::before {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(150deg, #0b4fd0, #0f63e0 55%, #0aa0ea) 0% 50% / 200% 200%;
+  background: var(--ecosystem-gradient) 0% 50% / 200% 200%;
   content: "";
   opacity: 0;
   transition: opacity 420ms ease;
   animation: csl-gradient-shift 9s ease-in-out infinite;
+}
+
+/* The system's hue glows softly in the top corner, brightening when the card is highlighted. */
+.ecosystem-card::after {
+  position: absolute;
+  z-index: -1;
+  top: -64px;
+  right: -64px;
+  width: 192px;
+  height: 192px;
+  background: var(--ecosystem-gradient);
+  border-radius: 50%;
+  content: "";
+  filter: blur(64px);
+  opacity: 0.2;
+  pointer-events: none;
+  transition: opacity 420ms ease;
 }
 
 .ecosystem-card__index {
@@ -5994,7 +6038,7 @@ a {
 .ecosystem-card:focus-visible {
   color: var(--white);
   border-color: transparent;
-  box-shadow: 0 26px 50px -24px rgba(11, 79, 208, 0.7);
+  box-shadow: 0 26px 50px -24px var(--ecosystem-shadow);
   transform: translateY(-8px);
 }
 
@@ -6002,6 +6046,12 @@ a {
 .ecosystem-card:hover::before,
 .ecosystem-card:focus-visible::before {
   opacity: 1;
+}
+
+.ecosystem-card--featured::after,
+.ecosystem-card:hover::after,
+.ecosystem-card:focus-visible::after {
+  opacity: 0.4;
 }
 
 .ecosystem-card--featured .ecosystem-card__index,
@@ -6015,8 +6065,8 @@ a {
 .ecosystem-card:focus-visible .ecosystem-card__icon {
   color: var(--white);
   background: rgba(255, 255, 255, 0.18);
-  rotate: -8deg;
-  scale: 1.08;
+  rotate: 8deg;
+  scale: 1.05;
 }
 
 .ecosystem-card--featured :is(.ecosystem-card__tag, ul),
@@ -6050,6 +6100,11 @@ a {
 .ecosystem-grid:has(.ecosystem-card:hover, .ecosystem-card:focus-visible)
   .ecosystem-card--featured:not(:hover, :focus-visible)::before {
   opacity: 0;
+}
+
+.ecosystem-grid:has(.ecosystem-card:hover, .ecosystem-card:focus-visible)
+  .ecosystem-card--featured:not(:hover, :focus-visible)::after {
+  opacity: 0.2;
 }
 
 .ecosystem-grid:has(.ecosystem-card:hover, .ecosystem-card:focus-visible)

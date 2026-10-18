@@ -11,7 +11,8 @@ type GrowthPanelProps = {
 
 /**
  * A tagged chart card. It rises in on its own as it scrolls into view (the CSL card a beat after
- * the traditional one), then its title lines rise and its bars grow left to right.
+ * the traditional one), then its title lines rise. The chart is its own trigger, so the bars grow
+ * left to right when they reach the viewport, the same way each title waits for its own lines.
  */
 export function GrowthPanel({ chart, variant }: GrowthPanelProps) {
   return (
@@ -28,7 +29,7 @@ export function GrowthPanel({ chart, variant }: GrowthPanelProps) {
         <RevealLines text={chart.title} />
       </h3>
 
-      <div aria-hidden="true" className="growth-chart">
+      <div aria-hidden="true" className="growth-chart" data-reveal="grow">
         {chart.bars.map((height, index) => (
           <span
             data-grow="y"
