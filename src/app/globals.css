@@ -5444,7 +5444,7 @@ a {
     0 10px 22px rgba(26, 72, 188, 0.4);
 }
 
-.capital-board.has-active .capital-orbit__node:not(.is-active) > * {
+.capital-board[data-active] .capital-orbit__node:not(.is-active) > * {
   opacity: 0.5;
 }
 

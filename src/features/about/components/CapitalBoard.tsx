@@ -35,9 +35,12 @@ export function CapitalBoard({ coreLabel, coreCaption, dimensions }: CapitalBoar
   const [activeId, setActiveId] = useState<string | null>(null);
   const points = dimensions.map((_, index) => orbitPoint(index, dimensions.length));
 
+  // Hover state lives in `data-active`, not the class list: ScrollReveal adds `is-revealed` to
+  // this board, and a changing className would make React overwrite it and hide the board.
   return (
     <div
-      className={`capital-board${activeId ? " has-active" : ""}`}
+      className="capital-board"
+      data-active={activeId ?? undefined}
       data-reveal="zoom"
       data-reveal-delay="2"
       onMouseLeave={() => setActiveId(null)}

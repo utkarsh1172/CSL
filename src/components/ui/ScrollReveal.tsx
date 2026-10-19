@@ -87,6 +87,19 @@ export function ScrollReveal() {
 
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
+        // React rewrites the whole class attribute when a className prop changes, dropping
+        // `is-revealed` and hiding an element that already scrolled in; put it straight back.
+        if (mutation.type === "attributes") {
+          if (
+            mutation.target instanceof HTMLElement &&
+            mutation.oldValue?.split(/\s+/).includes("is-revealed") &&
+            !mutation.target.classList.contains("is-revealed")
+          ) {
+            mutation.target.classList.add("is-revealed");
+          }
+          return;
+        }
+
         if (mutation.target instanceof HTMLElement) {
           const group = mutation.target.closest<HTMLElement>("[data-reveal-children]");
           if (group) observe(group);
@@ -106,7 +119,12 @@ export function ScrollReveal() {
       });
     });
 
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    mutationObserver.observe(document.body, {
+      attributeFilter: ["class"],
+      attributeOldValue: true,
+      childList: true,
+      subtree: true,
+    });
 
     return () => {
       mutationObserver.disconnect();
