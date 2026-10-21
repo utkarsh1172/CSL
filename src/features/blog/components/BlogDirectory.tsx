@@ -116,7 +116,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
                 alt=""
                 aria-hidden="true"
                 height={26}
-                src="/images/brand/linkedin-2021.png"
+                src="/images/brand/linkedin.svg"
                 width={104}
               />
             </a>

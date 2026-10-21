@@ -23,7 +23,17 @@ function ChevronIcon() {
 
 export function SiteHeader() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const navigationRef = useRef<HTMLElement>(null);
+
+  // The bar turns to frosted glass once content starts scrolling beneath it.
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 8);
+
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
 
   useEffect(() => {
     const closeOnOutsidePress = (event: PointerEvent) => {
@@ -45,7 +55,7 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-scrolled={scrolled ? "" : undefined}>
       <div className="site-header__inner">
         <BrandLogo priority />
 

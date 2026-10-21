@@ -94,7 +94,7 @@ export function ContactDetails() {
               alt=""
               aria-hidden="true"
               height={30}
-              src="/images/brand/linkedin-2021.png"
+              src="/images/brand/linkedin.svg"
               width={120}
             />
           </a>
