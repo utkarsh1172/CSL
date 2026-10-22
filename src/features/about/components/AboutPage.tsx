@@ -4,13 +4,13 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { LeadCard } from "@/components/sections/LeadCard";
+import { TrustedSection } from "@/components/sections/TrustedSection";
 import { aboutPage } from "@/content/pages/about";
 
 import { AboutHero } from "./AboutHero";
 import { CapitalSection } from "./CapitalSection";
 import { ComparisonSection } from "./ComparisonSection";
 import { EcosystemSection } from "./EcosystemSection";
-import { TrustedSection } from "./TrustedSection";
 import { WhySection } from "./WhySection";
 
 export function AboutPage() {

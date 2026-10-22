@@ -2,11 +2,17 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { LeadCard } from "@/components/sections/LeadCard";
+import { TrustedSection } from "@/components/sections/TrustedSection";
 import { homePage } from "@/content/pages/home";
+import { testimonials } from "@/content/shared/testimonials";
 
 import { HomeHero } from "./HomeHero";
+import { PartnershipSection } from "./PartnershipSection";
 import { PlateauSection } from "./PlateauSection";
+import { ProgramsSection } from "./ProgramsSection";
+import { TestimonialsSection } from "./TestimonialsSection";
 
 export function HomePage() {
   return (
@@ -33,6 +39,17 @@ export function HomePage() {
           asideId="talk-to-advisor"
         >
           <PlateauSection plateau={homePage.plateau} />
+          <PartnershipSection partnership={homePage.partnership} />
+          <ProgramsSection programs={homePage.programs} />
+          <TrustedSection heading={homePage.trustedBy} />
+          <TestimonialsSection content={homePage.testimonials} testimonials={testimonials} />
+          {/* The header's "Frequently Asked Questions" link lands here (/#faqs). */}
+          <FaqSection
+            align="start"
+            className="page-section page-section--ruled"
+            faqs={homePage.faqs}
+            idPrefix="home"
+          />
         </StickyAsideLayout>
       </main>
       <SiteFooter />

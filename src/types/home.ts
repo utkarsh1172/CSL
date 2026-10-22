@@ -1,3 +1,5 @@
+import type { FaqItem } from "./content";
+
 /** Two-tone heading copy: `title` renders in ink, `accent` in brand blue. */
 export type HomeHeading = {
   eyebrow?: string;
@@ -44,6 +46,34 @@ export type HomePlateau = {
   brochureHref: string;
 };
 
+export type HomePartner = {
+  name: string;
+  /** Logo file; without one the name is set as a typographic wordmark. */
+  logoSrc?: string;
+  title: string;
+  points: string[];
+};
+
+export type HomePartnership = {
+  heading: HomeHeading;
+  /** Shown either side of the link badge, in order. */
+  partners: [HomePartner, HomePartner];
+};
+
+export type FeaturedProgram = {
+  title: string;
+  summary: string;
+  href: string;
+  imageSrc: string;
+};
+
+export type HomePrograms = {
+  heading: HomeHeading;
+  viewAllLabel: string;
+  viewAllHref: string;
+  programs: FeaturedProgram[];
+};
+
 export type HomePageContent = {
   metaDescription: string;
   hero: HomeHero;
@@ -52,4 +82,11 @@ export type HomePageContent = {
     intro: string;
   };
   plateau: HomePlateau;
+  partnership: HomePartnership;
+  programs: HomePrograms;
+  trustedBy: HomeHeading;
+  testimonials: {
+    heading: HomeHeading;
+  };
+  faqs: FaqItem[];
 };
