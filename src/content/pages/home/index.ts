@@ -134,6 +134,90 @@ export const homePage: HomePageContent = {
         "Perspectives from technology leaders on how CSL shaped their thinking, decision-making and approach to leadership.",
     },
   },
+  // Photos are placeholders cropped from existing site photography until the outcome
+  // photography is added under /images/pages/home.
+  outcomes: {
+    heading: {
+      eyebrow: "Outcome",
+      title: "What changes after",
+      accent: "CSL",
+      description: "Real growth. Lasting influence.",
+    },
+    shifts: [
+      {
+        title: "Executive presence",
+        summary: "Speak with confidence and credibility.",
+        imageSrc: "/images/pages/blog/best-time-to-invest-in-pmp-training-canada.jpg",
+        imagePosition: "16% 40%",
+      },
+      {
+        title: "Strategic influence",
+        summary: "Shape decisions beyond your team.",
+        imageSrc: "/images/pages/blog/cisa-certified-role-interview-questions.jpg",
+        imagePosition: "62% 30%",
+      },
+      {
+        title: "Stronger peer relationships",
+        summary: "Build a trusted network of peers and advisors.",
+        imageSrc: "/images/pages/blog/mentorship-programs-employee-retention.jpg",
+        imagePosition: "55% 35%",
+      },
+      {
+        title: "Advisory and boardroom readiness",
+        summary: "Be ready for new opportunities.",
+        imageSrc: "/images/pages/blog/leading-hybrid-teams-without-losing-momentum.jpg",
+        imagePosition: "75% 40%",
+      },
+      {
+        title: "A clearer professional positioning",
+        summary: "Stand out in a complex landscape.",
+        imageSrc: "/images/pages/blog/stay-interviews-retention-conversation.jpg",
+        imagePosition: "38% 35%",
+      },
+    ],
+    rolesTitle: "Where CSL leaders go next",
+    roles: [
+      {
+        title: "Independent Consultants",
+        imageSrc: "/images/pages/blog/microlearning-for-busy-professionals.jpg",
+        imagePosition: "55% 40%",
+      },
+      {
+        title: "Strategic Advisors",
+        imageSrc: "/images/pages/blog/emotional-intelligence-leadership-skill.jpg",
+        imagePosition: "80% 30%",
+      },
+      {
+        title: "Board-Level Contributors",
+        imageSrc: "/images/pages/blog/top-5-myths-about-the-pmp-exam.jpg",
+        imagePosition: "62% 50%",
+      },
+      {
+        title: "Startup Mentors",
+        imageSrc: "/images/pages/blog/best-time-to-invest-in-pmp-training-canada.jpg",
+        imagePosition: "82% 50%",
+      },
+      {
+        title: "Executive Thought Leaders",
+        imageSrc: "/images/pages/blog/cybersecurity-leadership-for-executives.jpg",
+        imagePosition: "73% 40%",
+      },
+    ],
+  },
+  activation: {
+    heading: {
+      eyebrow: "How It Works",
+      title: "A connected leadership",
+      accent: "activation system.",
+    },
+    steps: [
+      { title: "Learn", summary: "World-class programs designed for senior leaders" },
+      { title: "Connect", summary: "Join an exclusive executive community" },
+      { title: "Engage", summary: "Participate in events, roundtables and peer learning" },
+      { title: "Apply", summary: "Turn insights into real business impact" },
+      { title: "Lead", summary: "Strengthen your influence and career positioning" },
+    ],
+  },
   faqs: [
     {
       question: "Is CSL a traditional education program?",

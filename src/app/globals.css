@@ -5660,6 +5660,593 @@ a {
   }
 }
 
+/* What changes after CSL: the shifts participants gain as photo cards, then the roles they step
+   into as tall photos with the role set over a dark fade. Sized by its own column. */
+.home-outcomes {
+  padding: 52px 0 60px;
+}
+
+.home-outcomes .section-shell {
+  container: home-outcomes / inline-size;
+}
+
+.outcome-shifts,
+.outcome-roles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.outcome-shifts {
+  margin: 26px 0 0;
+}
+
+.outcome-shifts > li,
+.outcome-roles > li {
+  display: flex;
+}
+
+.outcome-shift {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: #fffdf9;
+  border: 1px solid rgba(197, 203, 210, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px -22px rgba(18, 47, 89, 0.35);
+  transition:
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.outcome-shift__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #d9d5cc;
+}
+
+.outcome-shift__media img,
+.outcome-role img {
+  object-fit: cover;
+  transition: scale 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.outcome-shift__body {
+  padding: 12px 12px 14px;
+}
+
+/* A short royal rule over each title stretches when the card is hovered. */
+.outcome-shift__body::before {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin-bottom: 10px;
+  background: #1a56c7;
+  border-radius: 2px;
+  content: "";
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.outcome-shift h3 {
+  margin: 0 0 5px;
+  color: #0c1f43;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.86rem;
+  line-height: 1.25;
+  transition: color 320ms ease;
+}
+
+.outcome-shift p {
+  margin: 0;
+  color: #5b616c;
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+/* "Where CSL leaders go next", ruled off to the edge of the column. */
+.home-outcomes__roles-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 36px 0 0;
+  color: #0c1f43;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.home-outcomes__roles-title::after {
+  flex: 1;
+  height: 1px;
+  background: rgba(12, 31, 67, 0.12);
+  content: "";
+}
+
+.outcome-roles {
+  margin: 16px 0 0;
+}
+
+.outcome-role {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  overflow: hidden;
+  background: #1b2638;
+  border-radius: 14px;
+  box-shadow: 0 16px 34px -24px rgba(12, 31, 67, 0.6);
+  transition:
+    box-shadow 320ms ease,
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark fade for the caption, with a royal wash that rises in on hover. */
+.outcome-role::before,
+.outcome-role::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.outcome-role::before {
+  background: linear-gradient(180deg, rgba(8, 16, 34, 0) 38%, rgba(8, 16, 34, 0.85) 100%);
+}
+
+.outcome-role::after {
+  background: linear-gradient(180deg, rgba(26, 72, 188, 0) 30%, rgba(26, 72, 188, 0.55) 100%);
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+.outcome-role figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.outcome-role figcaption::before {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin-bottom: 8px;
+  background: #8fb8ff;
+  border-radius: 2px;
+  content: "";
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tablets: three cards over two wider ones, so neither row is cramped or left with an orphan. */
+@container home-outcomes (max-width: 720px) {
+  .outcome-shifts,
+  .outcome-roles {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .outcome-shifts > li,
+  .outcome-roles > li {
+    grid-column: span 2;
+  }
+
+  .outcome-shifts > li:nth-child(n + 4),
+  .outcome-roles > li:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  /* Fixed heights keep both rows level even though the lower cards are wider. */
+  .outcome-shift__media {
+    aspect-ratio: auto;
+    height: 140px;
+  }
+
+  .outcome-role {
+    aspect-ratio: auto;
+    height: 240px;
+  }
+}
+
+/* Phones: shifts become rows with a thumbnail, roles a 2 x 2 grid plus a wide card. */
+@container home-outcomes (max-width: 480px) {
+  .outcome-shifts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .outcome-shifts > li,
+  .outcome-shifts > li:nth-child(n + 4) {
+    grid-column: auto;
+  }
+
+  .outcome-shift {
+    flex-direction: row;
+  }
+
+  .outcome-shift__media {
+    flex: 0 0 min(36%, 150px);
+    height: auto;
+    min-height: 96px;
+  }
+
+  .outcome-shift__body {
+    align-self: center;
+    padding: 12px 16px;
+  }
+
+  .outcome-shift h3 {
+    font-size: 0.95rem;
+  }
+
+  .outcome-shift p {
+    font-size: 0.8rem;
+  }
+
+  .outcome-roles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .outcome-roles > li,
+  .outcome-roles > li:nth-child(n + 4) {
+    grid-column: auto;
+  }
+
+  .outcome-roles > li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .outcome-role {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .outcome-roles > li:last-child .outcome-role {
+    aspect-ratio: 2 / 1;
+  }
+
+  .outcome-role figcaption {
+    font-size: 0.9rem;
+  }
+}
+
+/* How it works: five steps on a line that draws itself in, each node popping as the line reaches
+   it. Afterwards a light keeps travelling the line and each node ripples as it passes. */
+.home-activation {
+  padding: 52px 0 64px;
+}
+
+.home-activation .section-shell {
+  container: home-activation / inline-size;
+}
+
+.activation {
+  --activation-node: 38px;
+  --activation-gap: 14px;
+  --activation-cycle: 4.4s;
+  --activation-loop-start: 2.1s;
+  position: relative;
+  margin-top: 34px;
+}
+
+.activation__steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 var(--activation-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* From the first node's centre to the last's: the last node sits one column-width from the end. */
+.activation__track {
+  position: absolute;
+  top: calc(var(--activation-node) / 2 - 1px);
+  right: calc((100% - 4 * var(--activation-gap)) / 5 - var(--activation-node) / 2);
+  left: calc(var(--activation-node) / 2);
+  height: 2px;
+  background: rgba(26, 72, 188, 0.14);
+  border-radius: 2px;
+  container-type: inline-size;
+}
+
+.activation__progress {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #1a48bc, #2f7fe3);
+  border-radius: inherit;
+  transform-origin: left center;
+}
+
+/* A comet of light; travels exactly the track's width (100cqw) on each pass. */
+.activation__spark {
+  position: absolute;
+  top: 50%;
+  left: -56px;
+  width: 56px;
+  height: 6px;
+  margin-top: -3px;
+  background: linear-gradient(90deg, rgba(143, 184, 255, 0), rgba(190, 215, 255, 0.9) 70%, #fff);
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(47, 127, 227, 0.9));
+  opacity: 0;
+}
+
+.activation__step {
+  position: relative;
+  min-width: 0;
+}
+
+.activation__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--activation-node);
+  height: var(--activation-node);
+  color: var(--white);
+  background: var(--gradient-royal);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 5px var(--cream),
+    0 0 0 6px rgba(26, 72, 188, 0.16),
+    0 10px 22px -10px rgba(26, 72, 188, 0.7);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition:
+    transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 320ms ease;
+}
+
+.activation__node::after {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(47, 127, 227, 0.65);
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+}
+
+.activation__step h3 {
+  margin: 16px 0 6px;
+  color: #0c1f43;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  transition: color 320ms ease;
+}
+
+.activation__step p {
+  max-width: 21ch;
+  margin: 0;
+  color: #5b616c;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+/* Entrance, once the timeline scrolls into view. */
+.motion-ready .activation:not(.is-revealed) .activation__progress {
+  scale: 0 1;
+}
+
+.motion-ready .activation:not(.is-revealed) .activation__node,
+.motion-ready .activation:not(.is-revealed) .activation__step :is(h3, p) {
+  opacity: 0;
+}
+
+.motion-ready .activation.is-revealed .activation__progress {
+  animation: csl-activation-draw-x 1500ms cubic-bezier(0.45, 0, 0.25, 1) 200ms both;
+}
+
+.motion-ready .activation.is-revealed .activation__node {
+  animation: csl-pop 620ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(150ms + var(--step-index) * 300ms)
+    both;
+}
+
+.motion-ready .activation.is-revealed .activation__step :is(h3, p) {
+  animation: csl-activation-rise 640ms cubic-bezier(0.22, 1, 0.36, 1)
+    calc(320ms + var(--step-index) * 300ms) both;
+}
+
+.motion-ready .activation.is-revealed .activation__step p {
+  animation-delay: calc(400ms + var(--step-index) * 300ms);
+}
+
+/* The live loop: the light crosses in the first 60% of each cycle, and a node ripples as the
+   light reaches it (node i sits i/4 of the way along). */
+.activation__spark {
+  animation: csl-activation-spark var(--activation-cycle) linear var(--activation-loop-start) infinite;
+}
+
+.activation__node::after {
+  animation: csl-activation-ripple var(--activation-cycle) ease-out
+    calc(var(--activation-loop-start) + var(--step-index) * var(--activation-cycle) * 0.14) infinite;
+}
+
+.motion-ready .activation:not(.is-revealed) .activation__spark,
+.motion-ready .activation:not(.is-revealed) .activation__node::after {
+  animation: none;
+}
+
+@keyframes csl-activation-draw-x {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes csl-activation-draw-y {
+  from {
+    scale: 1 0;
+  }
+}
+
+@keyframes csl-activation-rise {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+@keyframes csl-activation-spark {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+  }
+
+  6%,
+  54% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0;
+    translate: calc(100cqw + 56px) 0;
+  }
+
+  100% {
+    opacity: 0;
+    translate: calc(100cqw + 56px) 0;
+  }
+}
+
+@keyframes csl-activation-ripple {
+  0% {
+    opacity: 0.9;
+    scale: 1;
+  }
+
+  20%,
+  100% {
+    opacity: 0;
+    scale: 2;
+  }
+}
+
+/* Phones: a vertical timeline. Each step draws its own connector down to the next node. */
+@container home-activation (max-width: 600px) {
+  .activation__steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px 0;
+  }
+
+  .activation__track {
+    display: none;
+  }
+
+  .activation__step {
+    display: grid;
+    grid-template-columns: var(--activation-node) minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .activation__node {
+    grid-row: 1 / 3;
+  }
+
+  .activation__step h3 {
+    margin: 9px 0 4px;
+  }
+
+  .activation__step p {
+    max-width: none;
+    font-size: 0.84rem;
+  }
+
+  .activation__step:not(:last-child)::before {
+    position: absolute;
+    top: calc(var(--activation-node) / 2);
+    bottom: calc(-24px - var(--activation-node) / 2);
+    left: calc(var(--activation-node) / 2 - 1px);
+    width: 2px;
+    background: linear-gradient(180deg, #1a48bc, #2f7fe3);
+    border-radius: 2px;
+    content: "";
+    transform-origin: center top;
+  }
+
+  .motion-ready .activation:not(.is-revealed) .activation__step::before {
+    scale: 1 0;
+  }
+
+  .motion-ready .activation.is-revealed .activation__step::before {
+    animation: csl-activation-draw-y 420ms cubic-bezier(0.45, 0, 0.25, 1)
+      calc(320ms + var(--step-index) * 300ms) both;
+  }
+}
+
+@media (hover: hover) {
+  .outcome-shift:hover {
+    border-color: rgba(26, 72, 188, 0.25);
+    box-shadow: 0 24px 44px -26px rgba(26, 72, 188, 0.55);
+    transform: translateY(-5px);
+  }
+
+  .outcome-shift:hover .outcome-shift__media img,
+  .outcome-role:hover img {
+    scale: 1.07;
+  }
+
+  .outcome-shift:hover .outcome-shift__body::before,
+  .outcome-role:hover figcaption::before {
+    width: 36px;
+  }
+
+  .outcome-shift:hover h3 {
+    color: #1a48bc;
+  }
+
+  .outcome-role:hover {
+    box-shadow: 0 26px 46px -24px rgba(26, 72, 188, 0.65);
+    transform: translateY(-6px);
+  }
+
+  .outcome-role:hover::after {
+    opacity: 1;
+  }
+
+  .activation__step:hover .activation__node {
+    box-shadow:
+      0 0 0 5px var(--cream),
+      0 0 0 6px rgba(26, 72, 188, 0.3),
+      0 16px 28px -10px rgba(26, 72, 188, 0.85);
+    transform: translateY(-3px) scale(1.1);
+  }
+
+  .activation__step:hover h3 {
+    color: #1a48bc;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activation__spark,
+  .activation__node::after {
+    display: none;
+  }
+
+  .outcome-shift,
+  .outcome-shift__body::before,
+  .outcome-shift__media img,
+  .outcome-role,
+  .outcome-role img,
+  .outcome-role::after,
+  .outcome-role figcaption::before,
+  .activation__node {
+    transition: none !important;
+  }
+}
+
 /* About page */
 .about-page {
   background: var(--cream);
@@ -6194,6 +6781,8 @@ a {
    the track resets by exactly one half, so the loop never jumps. Edges fade into the page. */
 .marquee {
   --marquee-gap: 56px;
+  /* Its track is far wider than the screen; keep that width from sizing the layout around it. */
+  contain: inline-size;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -9695,8 +10284,10 @@ a {
 }
 
 @media (max-width: 1080px) {
+  /* minmax(0, ...): a bare 1fr can't shrink below its widest content (such as a logo marquee's
+     unbroken track), which would push every section off the side of a phone screen. */
   .sticky-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   /* On narrower screens the card follows the content instead of riding beside it. */

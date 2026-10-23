@@ -74,6 +74,42 @@ export type HomePrograms = {
   programs: FeaturedProgram[];
 };
 
+/** Placeholder photos are cropped from wide shots, so each card names the part to show. */
+export type OutcomePhoto = {
+  imageSrc: string;
+  /** CSS object-position for the crop, e.g. "20% 40%". */
+  imagePosition?: string;
+};
+
+export type OutcomeShift = OutcomePhoto & {
+  title: string;
+  summary: string;
+};
+
+export type OutcomeRole = OutcomePhoto & {
+  title: string;
+};
+
+export type HomeOutcomes = {
+  heading: HomeHeading;
+  /** What participants gain, in order. */
+  shifts: OutcomeShift[];
+  rolesTitle: string;
+  /** The roles participants move into. */
+  roles: OutcomeRole[];
+};
+
+export type ActivationStep = {
+  title: string;
+  summary: string;
+};
+
+export type HomeActivation = {
+  heading: HomeHeading;
+  /** Shown in order along the timeline. */
+  steps: ActivationStep[];
+};
+
 export type HomePageContent = {
   metaDescription: string;
   hero: HomeHero;
@@ -88,5 +124,7 @@ export type HomePageContent = {
   testimonials: {
     heading: HomeHeading;
   };
+  outcomes: HomeOutcomes;
+  activation: HomeActivation;
   faqs: FaqItem[];
 };
