@@ -13,5 +13,6 @@ export const editorialTeamAuthor: BlogAuthor = {
   role: "Leadership Learning Editors",
   organization: "Canada School of Leadership",
   initials: "CSL",
+  isTeam: true,
   bio: "The Canada School of Leadership editorial team shares practical guidance on leadership, learning and workplace growth for professionals and organizations across Canada.",
 };

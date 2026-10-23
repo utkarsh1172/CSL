@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getProgramBySlug, getProgramSlugs } from "@/content/programs";
 import { ProgramPage } from "@/features/programs/components/ProgramPage";
+import { createPageMetadata } from "@/lib/seo/metadata";
+import { programStructuredData } from "@/lib/seo/structured-data";
 
 type ProgramRouteProps = {
   params: Promise<{ slug: string }>;
@@ -25,14 +28,12 @@ export async function generateMetadata({ params }: ProgramRouteProps): Promise<M
     };
   }
 
-  return {
+  return createPageMetadata({
     title: program.name,
     description: program.metaDescription,
-    openGraph: {
-      title: program.name,
-      description: program.metaDescription,
-    },
-  };
+    path: `/programs/${program.slug}`,
+    image: { src: program.hero.imageSrc, alt: program.hero.imageAlt },
+  });
 }
 
 export default async function ProgramRoute({ params }: ProgramRouteProps) {
@@ -43,5 +44,10 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
     notFound();
   }
 
-  return <ProgramPage program={program} />;
+  return (
+    <>
+      <JsonLd data={programStructuredData(program)} />
+      <ProgramPage program={program} />
+    </>
+  );
 }

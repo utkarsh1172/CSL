@@ -14,6 +14,8 @@ export type BlogAuthor = {
   organization: string;
   bio: string;
   initials: string;
+  /** A team byline, credited to an organisation rather than a person in structured data. */
+  isTeam?: boolean;
 };
 
 export type BlogStat = {

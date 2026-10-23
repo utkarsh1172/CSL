@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getBlogPostBySlug, getBlogPostSlugs, getRelatedBlogPosts } from "@/content/blog";
 import { BlogArticle } from "@/features/blog/components/BlogArticle";
+import { createPageMetadata } from "@/lib/seo/metadata";
+import { blogPostStructuredData } from "@/lib/seo/structured-data";
 
 type BlogArticleRouteProps = {
   params: Promise<{ slug: string }>;
@@ -22,15 +25,18 @@ export async function generateMetadata({ params }: BlogArticleRouteProps): Promi
     };
   }
 
-  return {
+  return createPageMetadata({
     title: post.title,
     description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
+    path: post.href,
+    image: { src: post.imageSrc, alt: post.imageAlt },
+    article: {
+      publishedTime: post.publishedAt,
+      authors: [post.author.name],
+      section: post.category,
+      tags: post.tags,
     },
-  };
+  });
 }
 
 export default async function BlogArticleRoute({ params }: BlogArticleRouteProps) {
@@ -41,5 +47,10 @@ export default async function BlogArticleRoute({ params }: BlogArticleRouteProps
     notFound();
   }
 
-  return <BlogArticle post={post} relatedPosts={getRelatedBlogPosts(post.slug)} />;
+  return (
+    <>
+      <JsonLd data={blogPostStructuredData(post)} />
+      <BlogArticle post={post} relatedPosts={getRelatedBlogPosts(post.slug)} />
+    </>
+  );
 }

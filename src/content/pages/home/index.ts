@@ -7,7 +7,7 @@ const advisorHref = "/contact#talk-to-advisor";
 // photography is added under /images/pages/home.
 export const homePage: HomePageContent = {
   metaDescription:
-    "Canada School of Leadership and cSuite Networks join forces to provide world-class leadership education, exclusive executive community access and real-world application for senior professionals.",
+    "Leadership programs, an exclusive CXO community and real-world application for senior professionals, from Canada School of Leadership and cSuite Networks.",
   hero: {
     eyebrow: "A Strategic Partnership",
     title: "Leadership development for a more influential",

@@ -1,6 +1,7 @@
 /**
  * Conversion tracking. Events go to `window.dataLayer`, which Google Tag Manager (or GA4 through
- * GTM) reads; with no container configured they simply queue, so the site works either way.
+ * GTM) reads, and to GA4 directly when it is loaded without a container (`window.gtag`); with
+ * neither configured they simply queue, so the site works either way.
  * Event names follow the CRO funnel: CTA click → form start → lead submitted.
  */
 export type AnalyticsEvent =
@@ -18,7 +19,9 @@ export type AnalyticsEvent =
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    dataLayer?: unknown[];
+    /** Defined only when GA4 is loaded directly (src/components/layout/AnalyticsTags.tsx). */
+    gtag?: (command: "event", name: string, params: Record<string, unknown>) => void;
   }
 }
 
@@ -27,6 +30,7 @@ export function trackEvent(event: AnalyticsEvent) {
 
   const { name, ...params } = event;
   (window.dataLayer ??= []).push({ event: name, ...params });
+  window.gtag?.("event", name, params);
 
   if (process.env.NODE_ENV !== "production") {
     console.info("[analytics]", name, params);
