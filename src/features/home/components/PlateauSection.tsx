@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import type { HomePlateau } from "@/types/home";
@@ -45,29 +46,29 @@ export function PlateauSection({ plateau }: PlateauSectionProps) {
           <ul className="plateau-gaps" data-reveal-children="">
             {plateau.gaps.map((gap, index) => (
               <li key={gap.title}>
-                <a
+                <Link
                   className={`plateau-gap${index === 0 ? " plateau-gap--featured" : ""}`}
-                  href="#talk-to-advisor"
+                  href={plateau.gapsHref}
                 >
                   <span className="plateau-gap__title">
                     {gap.title}
                     <ArrowIcon />
                   </span>
                   <span className="plateau-gap__question">{gap.question}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        <a
+        <Link
           className="button button--primary home-plateau__brochure"
           data-boom-click=""
           data-reveal="rise"
           href={plateau.brochureHref}
         >
           {plateau.brochureLabel}
-        </a>
+        </Link>
       </div>
     </section>
   );

@@ -80,7 +80,7 @@ export function PartnershipSection({ partnership }: PartnershipSectionProps) {
   return (
     <section
       aria-labelledby="partnership-heading"
-      className="page-section page-section--ruled home-partnership"
+      className="page-section home-partnership"
       id="partnership"
     >
       <div className="section-shell">

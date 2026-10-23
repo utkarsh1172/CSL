@@ -30,7 +30,7 @@ export function ProgramsSection({ programs }: ProgramsSectionProps) {
   return (
     <section
       aria-labelledby="programs-heading"
-      className="page-section page-section--ruled home-programs"
+      className="page-section home-programs"
       id="programs"
     >
       <div className="section-shell">

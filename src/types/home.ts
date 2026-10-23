@@ -1,5 +1,3 @@
-import type { FaqItem } from "./content";
-
 /** Two-tone heading copy: `title` renders in ink, `accent` in brand blue. */
 export type HomeHeading = {
   eyebrow?: string;
@@ -8,27 +6,47 @@ export type HomeHeading = {
   description?: string;
 };
 
+export type HomeLink = {
+  label: string;
+  href: string;
+};
+
 export type HomeStat = {
   /** Counted up on reveal, e.g. "5,000+", "20+" or "5-Step". */
   value: string;
   label: string;
 };
 
+/** Placeholder photos are cropped from wide shots, so each one names the part to show. */
+export type HomePhoto = {
+  imageSrc: string;
+  /** CSS object-position for the crop, e.g. "20% 40%". */
+  imagePosition?: string;
+};
+
+export type HeroCard = HomePhoto & {
+  title: string;
+  href: string;
+};
+
 export type HomeHero = {
   eyebrow: string;
   title: string;
-  /** Highlighted closing phrase, set on its own line. */
+  /** Highlighted closing word, swept with the brand gradient. */
   accent: string;
-  /** Short paragraphs under the headline, in order. */
-  summary: string[];
-  rating: string;
-  imageSrc: string;
-  imageAlt: string;
-  /** Who the program is for: the lead-in word, then the roles. */
-  audience: {
-    label: string;
-    roles: string[];
+  summary: string;
+  primaryAction: HomeLink;
+  secondaryAction: HomeLink;
+  portrait: HomePhoto & {
+    imageAlt: string;
   };
+  /** The floating card over the portrait: the activation steps, linking to the timeline. */
+  journey: {
+    steps: string[];
+    href: string;
+    label: string;
+  };
+  cards: [HeroCard, HeroCard];
   stats: HomeStat[];
 };
 
@@ -42,6 +60,8 @@ export type HomePlateau = {
   imageSrc: string;
   imageAlt: string;
   gaps: PlateauGap[];
+  /** Where each gap card leads. */
+  gapsHref: string;
   brochureLabel: string;
   brochureHref: string;
 };
@@ -74,27 +94,12 @@ export type HomePrograms = {
   programs: FeaturedProgram[];
 };
 
-/** Placeholder photos are cropped from wide shots, so each card names the part to show. */
-export type OutcomePhoto = {
-  imageSrc: string;
-  /** CSS object-position for the crop, e.g. "20% 40%". */
-  imagePosition?: string;
-};
-
-export type OutcomeShift = OutcomePhoto & {
-  title: string;
-  summary: string;
-};
-
-export type OutcomeRole = OutcomePhoto & {
+export type OutcomeRole = HomePhoto & {
   title: string;
 };
 
 export type HomeOutcomes = {
   heading: HomeHeading;
-  /** What participants gain, in order. */
-  shifts: OutcomeShift[];
-  rolesTitle: string;
   /** The roles participants move into. */
   roles: OutcomeRole[];
 };
@@ -110,21 +115,29 @@ export type HomeActivation = {
   steps: ActivationStep[];
 };
 
+export type HomeCallToAction = {
+  eyebrow: string;
+  title: string;
+  accent: string;
+  summary: string;
+  primaryAction: HomeLink;
+  secondaryAction: HomeLink;
+  /** Photo for the right half; without one, a drawn sunrise over the mountains is shown. */
+  imageSrc?: string;
+};
+
 export type HomePageContent = {
   metaDescription: string;
   hero: HomeHero;
-  advisor: {
-    title: string;
-    intro: string;
-  };
+  /** Label over the logo band under the hero. */
+  trustedBy: string;
   plateau: HomePlateau;
   partnership: HomePartnership;
   programs: HomePrograms;
-  trustedBy: HomeHeading;
+  outcomes: HomeOutcomes;
+  activation: HomeActivation;
   testimonials: {
     heading: HomeHeading;
   };
-  outcomes: HomeOutcomes;
-  activation: HomeActivation;
-  faqs: FaqItem[];
+  callToAction: HomeCallToAction;
 };

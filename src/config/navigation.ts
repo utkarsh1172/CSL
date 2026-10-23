@@ -21,7 +21,7 @@ export const navigationGroups: NavigationGroup[] = [
     links: [
       { label: "Success Stories", href: "/success-stories" },
       { label: "Program Brochures", href: "/resources/brochures" },
-      { label: "Frequently Asked Questions", href: "/#faqs" },
+      { label: "Frequently Asked Questions", href: "/about#faqs" },
     ],
   },
 ];

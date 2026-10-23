@@ -18,7 +18,7 @@ export function ActivationSection({ activation }: ActivationSectionProps) {
   return (
     <section
       aria-labelledby="activation-heading"
-      className="page-section page-section--ruled home-activation"
+      className="page-section home-activation"
       id="how-it-works"
     >
       <div className="section-shell">
