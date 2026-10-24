@@ -2,6 +2,7 @@ import type { Testimonial } from "@/types/content";
 
 type TestimonialCardProps = {
   testimonial: Testimonial;
+  variant?: "default" | "flip";
 };
 
 function QuoteIcon() {
@@ -12,7 +13,34 @@ function QuoteIcon() {
   );
 }
 
-export function TestimonialCard({ testimonial }: TestimonialCardProps) {
+export function TestimonialCard({ testimonial, variant = "default" }: TestimonialCardProps) {
+  if (variant === "flip") {
+    return (
+      <figure
+        aria-label={`Testimonial from ${testimonial.name}`}
+        className="testimonial-card testimonial-card--flip flip-card"
+        tabIndex={0}
+      >
+        <div className="testimonial-card__inner flip-card__inner">
+          <div className="testimonial-card__face testimonial-card__front flip-card__face flip-card__front">
+            <QuoteIcon />
+            <blockquote>
+              <p>{testimonial.quote}</p>
+            </blockquote>
+            <span className="testimonial-card__flip-hint">Meet the leader</span>
+          </div>
+          <figcaption className="testimonial-card__face testimonial-card__back flip-card__face flip-card__back">
+            <span className="flip-card__eyebrow">Leadership perspective</span>
+            <strong>{testimonial.name}</strong>
+            <span>
+              {testimonial.role} | {testimonial.organization} | {testimonial.region}
+            </span>
+          </figcaption>
+        </div>
+      </figure>
+    );
+  }
+
   return (
     <figure className="testimonial-card">
       <QuoteIcon />

@@ -7,6 +7,8 @@ type SectionHeadingProps = {
   title: string;
   /** Highlighted tail of the title; omit for a single-tone heading. */
   accent?: string;
+  /** Optional text rendered after the highlighted phrase. */
+  suffix?: string;
   eyebrow?: ReactNode;
   description?: string;
   align?: "center" | "start";
@@ -18,6 +20,7 @@ export function SectionHeading({
   id,
   title,
   accent,
+  suffix,
   eyebrow,
   description,
   align = "center",
@@ -37,6 +40,14 @@ export function SectionHeading({
             {" "}
             <span className="section-heading__accent">
               <RevealLines text={accent} />
+            </span>
+          </>
+        ) : null}
+        {suffix ? (
+          <>
+            {" "}
+            <span className="section-heading__suffix">
+              <RevealLines text={suffix} />
             </span>
           </>
         ) : null}

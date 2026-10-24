@@ -4,13 +4,11 @@ export const homePage: HomePageContent = {
   metaDescription:
     "A leadership transformation ecosystem that re-positions senior professionals: mentorship, visibility and positioning for CTOs, CIOs, CISOs, VPs and senior executives.",
   hero: {
-    eyebrow: "A Leadership Transformation Ecosystem",
-    title: "Where senior professionals don't get educated. They get",
-    accent: "re-positioned.",
+    eyebrow: "A Strategic Partnership",
+    title: "Leadership development for a more influential",
+    accent: "tomorrow.",
     summary: [
-      "Most professionals don't fail because they lack experience.",
-      "They fail because their experience never becomes visible, structured, or directional.",
-      "CSL exists for one reason — to turn what you already know into what the market finally recognizes.",
+      "Canada School of Leadership and cSuite Networks join forces to provide world-class leadership education, exclusive executive community access and real-world application for today's senior professionals.",
     ],
     rating: "4.9/5",
     // Placeholder until the home hero photograph is added under /images/pages/home.
@@ -39,9 +37,8 @@ export const homePage: HomePageContent = {
       description:
         "Experienced professionals often have the knowledge, achievements and credibility — but lack the positioning, visibility and ecosystem required for their next level.",
     },
-    // Placeholder until the cohort networking photograph is added under /images/pages/home.
-    imageSrc: "/images/pages/blog/emotional-intelligence-leadership-skill.jpg",
-    imageAlt: "Two senior professionals celebrating a breakthrough together",
+    imageSrc: "/images/pages/home/executive-networking-clear.png",
+    imageAlt: "Four senior leaders networking at an executive event",
     gaps: [
       { title: "Identity Gap", question: "What's your next leadership identity?" },
       { title: "Visibility Gap", question: "Is your expertise visible to the right people?" },
@@ -68,17 +65,6 @@ export const homePage: HomePageContent = {
           "AI and future leadership",
           "Structured learning and mentorship",
           "Global faculty and industry experts",
-        ],
-      },
-      {
-        // Set as a wordmark until cSuite Networks' approved logo file is added.
-        name: "cSuite Networks",
-        title: "Executive community and leadership visibility",
-        points: [
-          "Exclusive CXO network",
-          "Regional and global events",
-          "Media, publications and insights",
-          "Peer learning and collaboration",
         ],
       },
     ],
@@ -124,6 +110,38 @@ export const homePage: HomePageContent = {
   trustedBy: {
     title: "Trusted by",
     accent: "Industry Leaders",
+  },
+  journey: {
+    heading: {
+      eyebrow: "The CSL Journey",
+      title: "How transformation",
+      accent: "actually",
+      suffix: "happens",
+      description:
+        "You already have the experience. We only reorganize how the world sees it.",
+    },
+    steps: [
+      {
+        title: "Identity Mapping",
+        summary: "Understanding your current leadership positioning gap",
+      },
+      {
+        title: "Execution Design",
+        summary: "Defining what actions convert experience into visibility",
+      },
+      {
+        title: "Visibility Building",
+        summary: "Creating public leadership presence through structured output",
+      },
+      {
+        title: "Portfolio Formation",
+        summary: "Converting work into documented authority",
+      },
+      {
+        title: "Market Transition",
+        summary: "Positioning for consulting, advisory, or leadership elevation",
+      },
+    ],
   },
   testimonials: {
     heading: {

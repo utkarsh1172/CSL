@@ -51,6 +51,7 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
           ))}
         </ul>
 
+        {/*
         <h3 className="home-outcomes__roles-title" data-reveal="up">
           {outcomes.rolesTitle}
         </h3>
@@ -70,6 +71,7 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
             </li>
           ))}
         </ul>
+        */}
       </div>
     </section>
   );

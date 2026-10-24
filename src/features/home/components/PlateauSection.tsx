@@ -61,7 +61,7 @@ export function PlateauSection({ plateau }: PlateauSectionProps) {
         </div>
 
         <a
-          className="button button--primary home-plateau__brochure"
+          className="button button--more home-plateau__brochure"
           data-boom-click=""
           data-reveal="rise"
           href={plateau.brochureHref}

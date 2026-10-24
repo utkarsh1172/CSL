@@ -5,6 +5,7 @@ export type HomeHeading = {
   eyebrow?: string;
   title: string;
   accent?: string;
+  suffix?: string;
   description?: string;
 };
 
@@ -56,8 +57,7 @@ export type HomePartner = {
 
 export type HomePartnership = {
   heading: HomeHeading;
-  /** Shown either side of the link badge, in order. */
-  partners: [HomePartner, HomePartner];
+  partners: [HomePartner];
 };
 
 export type FeaturedProgram = {
@@ -110,6 +110,17 @@ export type HomeActivation = {
   steps: ActivationStep[];
 };
 
+export type HomeJourneyStep = {
+  title: string;
+  summary: string;
+};
+
+export type HomeJourney = {
+  heading: HomeHeading;
+  /** Alternates above and below the journey line in this order. */
+  steps: HomeJourneyStep[];
+};
+
 export type HomePageContent = {
   metaDescription: string;
   hero: HomeHero;
@@ -121,6 +132,7 @@ export type HomePageContent = {
   partnership: HomePartnership;
   programs: HomePrograms;
   trustedBy: HomeHeading;
+  journey: HomeJourney;
   testimonials: {
     heading: HomeHeading;
   };

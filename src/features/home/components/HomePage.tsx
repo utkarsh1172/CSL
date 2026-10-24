@@ -8,8 +8,9 @@ import { TrustedSection } from "@/components/sections/TrustedSection";
 import { homePage } from "@/content/pages/home";
 import { testimonials } from "@/content/shared/testimonials";
 
-import { ActivationSection } from "./ActivationSection";
+// import { ActivationSection } from "./ActivationSection";
 import { HomeHero } from "./HomeHero";
+import { JourneySection } from "./JourneySection";
 import { OutcomesSection } from "./OutcomesSection";
 import { PartnershipSection } from "./PartnershipSection";
 import { PlateauSection } from "./PlateauSection";
@@ -44,9 +45,10 @@ export function HomePage() {
           <PartnershipSection partnership={homePage.partnership} />
           <ProgramsSection programs={homePage.programs} />
           <TrustedSection heading={homePage.trustedBy} />
-          <TestimonialsSection content={homePage.testimonials} testimonials={testimonials} />
           <OutcomesSection outcomes={homePage.outcomes} />
-          <ActivationSection activation={homePage.activation} />
+          <JourneySection journey={homePage.journey} />
+          <TestimonialsSection content={homePage.testimonials} testimonials={testimonials} />
+          {/* <ActivationSection activation={homePage.activation} /> */}
           {/* The header's "Frequently Asked Questions" link lands here (/#faqs). */}
           <FaqSection
             align="start"

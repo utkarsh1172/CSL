@@ -43,10 +43,10 @@ export function HomeHero({ hero }: HomeHeroProps) {
             </p>
             <div>
               <Link className="button button--primary" data-boom-click="" href="/contact">
-                Start Your Journey
+                Explore Leadership Programs
               </Link>
               <a className="button button--light" data-boom-click="" href="#talk-to-advisor">
-                Schedule a Free Call
+                Join the Community
               </a>
             </div>
           </div>

@@ -15,7 +15,7 @@ export function TestimonialsSection({ content, testimonials }: TestimonialsSecti
   return (
     <section
       aria-labelledby="home-testimonials-heading"
-      className="page-section home-testimonials"
+      className="page-section page-section--ruled home-testimonials"
       id="testimonials"
     >
       <div className="section-shell">
@@ -32,7 +32,7 @@ export function TestimonialsSection({ content, testimonials }: TestimonialsSecti
           className="testimonial-grid"
           items={testimonials.map((testimonial) => ({
             key: testimonial.name,
-            node: <TestimonialCard testimonial={testimonial} />,
+            node: <TestimonialCard testimonial={testimonial} variant="flip" />,
           }))}
           moreLabel="View More"
           withArrow
