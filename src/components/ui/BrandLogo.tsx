@@ -8,9 +8,9 @@ type BrandLogoProps = {
 export function BrandLogo({ priority = false }: BrandLogoProps) {
   return (
     <Link className="brand-logo" href="/" aria-label="Canada School of Leadership home">
-      {/* Served as-is: the 3x master stays crisp on high-density screens, which a re-encode softens. */}
+      {/* Served as-is so the supplied high-resolution master stays crisp on high-density screens. */}
       <Image
-        src="/images/brand/canada-school-of-leadership-logo.png"
+        src="/images/brand/csl-logo-dark-4k.png"
         alt="Canada School of Leadership"
         width={231}
         height={80}

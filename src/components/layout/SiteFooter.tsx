@@ -36,7 +36,7 @@ export function SiteFooter() {
               <Image
                 alt="Canada School of Leadership"
                 height={80}
-                src="/images/brand/canada-school-of-leadership-white.png"
+                src="/images/brand/csl-logo-white-4k.png"
                 unoptimized
                 width={231}
               />

@@ -10,12 +10,29 @@ type ProgramHeroProps = {
 };
 
 export function ProgramHero({ hero }: ProgramHeroProps) {
+  const hasBackgroundArtwork = Boolean(hero.backgroundImageSrc);
+
   return (
-    <section aria-labelledby="program-heading" className="program-hero">
+    <section
+      aria-labelledby="program-heading"
+      className={`program-hero${hasBackgroundArtwork ? " program-hero--artwork" : ""}`}
+    >
+      {hero.backgroundImageSrc ? (
+        <div aria-hidden="true" className="program-hero__background">
+          <Image alt="" fill preload sizes="100vw" src={hero.backgroundImageSrc} />
+        </div>
+      ) : null}
       {/* A slow-drifting glow and grid give the dark backdrop a live, technical feel. */}
       <div aria-hidden="true" className="program-hero__backdrop" />
       <div className="program-hero__visual">
-        <Image alt={hero.imageAlt} fill priority sizes="(max-width: 900px) 100vw, 50vw" src={hero.imageSrc} />
+        <Image
+          alt={hero.imageAlt}
+          fill
+          loading={hasBackgroundArtwork ? "eager" : undefined}
+          preload={!hasBackgroundArtwork}
+          sizes="(max-width: 900px) 88vw, 50vw"
+          src={hero.imageSrc}
+        />
       </div>
 
       <div className="section-shell program-hero__inner">

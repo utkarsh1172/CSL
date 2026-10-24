@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Fragment, type CSSProperties } from "react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { LineIcon } from "@/components/ui/LineIcon";
 import type { Program } from "@/types/program";
 
 type DifferenceSectionProps = {
@@ -68,7 +69,9 @@ export function DifferenceSection({ difference }: DifferenceSectionProps) {
         <ul className="authority-grid" data-reveal-children="">
           {difference.authorities.map((authority) => (
             <li className="authority-card" key={authority.title}>
-              <span aria-hidden="true" className="authority-card__dot" />
+              <span className="authority-card__icon">
+                <LineIcon name={authority.icon} />
+              </span>
               <h3>{authority.title}</h3>
               <p>{authority.detail}</p>
             </li>

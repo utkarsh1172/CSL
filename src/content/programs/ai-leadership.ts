@@ -12,21 +12,21 @@ export const aiLeadershipProgram: Program = {
     summary:
       "For aspiring CXOs, CIOs, CTOs, CISOs, CAIOs, Senior IT Leaders, Digital Transformation Leaders, who want to develop the strategic capability to lead AI-driven transformation.",
     rating: "4.9/5",
-    // Placeholder until the program portrait is added under /images/pages/programs.
-    imageSrc: "/images/pages/blog/cybersecurity-leadership-for-executives.jpg",
-    imageAlt: "A technology leader reviewing AI systems in a data centre",
+    backgroundImageSrc: "/images/pages/programs/ai-leadership/hero-background.png",
+    imageSrc: "/images/pages/programs/ai-leadership/hero-presenter.png",
+    imageAlt: "An AI leadership program facilitator holding a tablet",
     stats: [
-      { value: "15+", label: "Countries", detail: "Learn with a globally connected leadership community" },
-      { value: "25+", label: "Regions", detail: "Exchange perspectives across diverse technology markets" },
+      { value: "15+", label: "Countries", detail: "" },
+      { value: "25+", label: "Regions", detail: "" },
       {
         value: "500+",
         label: "StartUp Founders",
-        detail: "Engage with entrepreneurial and business perspectives",
+        detail: "",
       },
       {
         value: "Real-World",
         label: "AI Projects",
-        detail: "Discuss, debate and apply AI to practical business scenarios",
+        detail: "",
       },
     ],
   },
@@ -58,9 +58,8 @@ export const aiLeadershipProgram: Program = {
       { label: "Duration", value: "8 to 12 months" },
       { label: "Mode", value: "100% Online + Engagement-based Learning" },
     ],
-    // Placeholder until the program overview artwork is added under /images/pages/programs.
-    imageSrc: "/images/pages/blog/top-5-myths-about-the-pmp-exam.jpg",
-    imageAlt: "Leaders mapping an AI initiative on paper beside their laptops",
+    imageSrc: "/images/pages/programs/ai-leadership/overview-ai-chip-clear.png",
+    imageAlt: "Artificial intelligence processor illuminated on a circuit board",
   },
   curriculum: {
     heading: {
@@ -69,8 +68,8 @@ export const aiLeadershipProgram: Program = {
       accent: "foundation to capstone.",
     },
     journey: ["AI Awareness", "AI Strategy", "AI Governance", "AI Transformation", "AI-Driven Leadership"],
-    imageSrc: "/images/pages/blog/cisa-certified-role-interview-questions.jpg",
-    imageAlt: "Technology leaders collaborating on an AI strategy",
+    imageSrc: "/images/pages/programs/ai-leadership/curriculum-ai-collaboration.png",
+    imageAlt: "Technology leaders collaborating around an AI system display",
     months: [
       {
         title: "AI Leadership Foundation",
@@ -199,8 +198,8 @@ export const aiLeadershipProgram: Program = {
       },
     ],
     journey: ["AI Awareness", "AI Strategy", "AI Governance", "AI Transformation", "AI-Driven Leadership"],
-    imageSrc: "/images/pages/blog/best-time-to-invest-in-pmp-training-canada.jpg",
-    imageAlt: "A leader walking peers through an AI transformation plan",
+    imageSrc: "/images/pages/programs/ai-leadership/benefits-ai-leadership.png",
+    imageAlt: "A technology leader presenting a digital market dashboard to a colleague",
   },
   mentors: {
     heading: {
@@ -232,6 +231,8 @@ export const aiLeadershipProgram: Program = {
       "Complete the program and receive a formal Canada School of Leadership credential designed for professional recognition, digital sharing and career visibility.",
     badges: ["LinkedIn Ready", "Digital Badge", "Credential Verification"],
     certificateProgram: "AI Leadership Program",
+    imageSrc: "/images/pages/programs/ai-leadership/recognition-certificate.png",
+    imageAlt: "Canada School of Leadership executive certificate with digital credential and LinkedIn recognition",
   },
   difference: {
     heading: {
@@ -255,29 +256,35 @@ export const aiLeadershipProgram: Program = {
       {
         title: "Regional Authority",
         detail: "Regional meetups, CXO portfolio, digital assets, and go-to-market learning.",
+        icon: "earth",
       },
       {
         title: "Academic Authority",
         detail: "International publications, white papers, guest speakers, interactions with academic experts.",
+        icon: "graduation-cap",
       },
       {
         title: "Leadership Authority",
         detail:
           "Executive interviews, group discussions, leadership events, & opportunities to demonstrate leadership thinking.",
+        icon: "business",
       },
       {
         title: "Mentoring Authority",
         detail: "1:1 counselling sessions, peer mentoring, & access to an experienced industry network.",
+        icon: "mentoring",
       },
       {
         title: "Learning Experience",
         detail:
           "LMS, eLearning, blended learning, eBooks, audiobooks, pre-recorded sessions, and experience-based learning resources.",
+        icon: "brain",
       },
       {
         title: "Practice Authority",
         detail:
           "Learn from Domain Specialists and Practice Leaders who bring real-world perspectives & challenges into your leadership journey.",
+        icon: "rocket",
       },
     ],
   },

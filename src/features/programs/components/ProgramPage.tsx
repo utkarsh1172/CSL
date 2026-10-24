@@ -60,12 +60,15 @@ export function ProgramPage({ program }: ProgramPageProps) {
           <RecognitionSection recognition={program.recognition} />
           <DifferenceSection difference={program.difference} />
           <ProgramCallToAction brochureHref={program.brochureHref} callToAction={program.callToAction} />
-          <FaqSection
-            align="start"
-            className="page-section"
-            faqs={program.organisationFaqs}
-            idPrefix="program-csl"
-          />
+          {/* Temporarily hidden: organisation-wide CSL FAQ block. */}
+          {/*
+            <FaqSection
+              align="start"
+              className="page-section"
+              faqs={program.organisationFaqs}
+              idPrefix="program-csl"
+            />
+          */}
           <FaqSection
             accent="Leadership Program"
             align="start"

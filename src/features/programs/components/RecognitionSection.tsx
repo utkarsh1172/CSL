@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { RevealLines } from "@/components/ui/RevealLines";
 import type { Program } from "@/types/program";
 
@@ -53,32 +55,42 @@ export function RecognitionSection({ recognition }: RecognitionSectionProps) {
           </ul>
         </div>
 
-        {/* A drawn sample certificate and digital badge; swap for the real artwork when ready. */}
         <div
           aria-label={`Sample Canada School of Leadership certificate for the ${recognition.certificateProgram}, with its digital badge`}
-          className="certificate-stack"
+          className={`certificate-stack${recognition.imageSrc ? " certificate-stack--image" : ""}`}
           data-reveal="zoom"
           data-reveal-delay="2"
           role="img"
         >
-          <div aria-hidden="true" className="certificate">
-            <span className="certificate__brand">Canada School of Leadership</span>
-            <span className="certificate__kind">Executive Certificate</span>
-            <span className="certificate__line">This is to certify that</span>
-            <span className="certificate__name">Your Name</span>
-            <span className="certificate__line">has successfully completed the</span>
-            <span className="certificate__program">{recognition.certificateProgram}</span>
-            <span className="certificate__signatures">
-              <span />
-              <span />
-            </span>
-          </div>
-          <div aria-hidden="true" className="certificate-badge">
-            <span className="certificate-badge__brand">CSL</span>
-            <span>{recognition.certificateProgram}</span>
-            <span className="certificate-badge__seal">✓</span>
-            <span className="certificate-badge__verified">Verified Credential</span>
-          </div>
+          {recognition.imageSrc ? (
+            <Image
+              alt={recognition.imageAlt ?? ""}
+              fill
+              sizes="(max-width: 900px) 80vw, 360px"
+              src={recognition.imageSrc}
+            />
+          ) : (
+            <>
+              <div aria-hidden="true" className="certificate">
+                <span className="certificate__brand">Canada School of Leadership</span>
+                <span className="certificate__kind">Executive Certificate</span>
+                <span className="certificate__line">This is to certify that</span>
+                <span className="certificate__name">Your Name</span>
+                <span className="certificate__line">has successfully completed the</span>
+                <span className="certificate__program">{recognition.certificateProgram}</span>
+                <span className="certificate__signatures">
+                  <span />
+                  <span />
+                </span>
+              </div>
+              <div aria-hidden="true" className="certificate-badge">
+                <span className="certificate-badge__brand">CSL</span>
+                <span>{recognition.certificateProgram}</span>
+                <span className="certificate-badge__seal">✓</span>
+                <span className="certificate-badge__verified">Verified Credential</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>

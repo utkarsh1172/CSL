@@ -41,6 +41,7 @@ export type ProgramBenefit = {
 export type ProgramAuthority = {
   title: string;
   detail: string;
+  icon: LineIconName;
 };
 
 export type Program = {
@@ -53,6 +54,8 @@ export type Program = {
     accent: string;
     summary: string;
     rating: string;
+    /** Optional full-bleed artwork behind the hero content and portrait. */
+    backgroundImageSrc?: string;
     imageSrc: string;
     imageAlt: string;
     stats: ProgramStat[];
@@ -117,6 +120,8 @@ export type Program = {
     summary: string;
     badges: string[];
     certificateProgram: string;
+    imageSrc?: string;
+    imageAlt?: string;
   };
   difference: {
     heading: HeadingContent;

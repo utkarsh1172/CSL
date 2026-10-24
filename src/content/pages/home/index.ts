@@ -58,7 +58,7 @@ export const homePage: HomePageContent = {
     partners: [
       {
         name: "Canada School of Leadership",
-        logoSrc: "/images/brand/canada-school-of-leadership-black.png",
+        logoSrc: "/images/brand/csl-logo-dark-4k.png",
         title: "Leadership education and transformation",
         points: [
           "CXO and executive programs",
