@@ -5634,6 +5634,8 @@ a {
 
 .csl-journey__card {
   box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
   display: flex;
   grid-column: 1;
   flex-direction: column;
@@ -5642,6 +5644,7 @@ a {
   width: min(190px, calc(100% + 40px));
   height: 100%;
   padding: 14px 12px;
+  overflow: hidden;
   justify-self: center;
   text-align: center;
   background: rgba(250, 249, 246, 0.9);
@@ -5649,8 +5652,22 @@ a {
   border-radius: 12px;
   box-shadow: 0 12px 24px -20px rgba(22, 64, 151, 0.38);
   transition:
+    border-color 280ms ease,
     box-shadow 320ms ease,
     transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.csl-journey__card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(120deg, #1747c0 0%, #2b66ee 52%, #3f84ff 100%);
+  content: "";
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity 280ms ease,
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .csl-journey__step--above .csl-journey__card {
@@ -5663,25 +5680,36 @@ a {
 
 .csl-journey__card--featured {
   color: var(--white);
-  background: linear-gradient(135deg, #285ed3 0%, #3c72ea 100%);
+  background: rgba(250, 249, 246, 0.9);
   border-color: transparent;
   box-shadow: 0 16px 28px -18px rgba(25, 76, 192, 0.62);
 }
 
+.csl-journey__card--featured::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .csl-journey__card h3 {
+  position: relative;
+  z-index: 1;
   margin: 0 0 6px;
   color: #1551c7;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(0.82rem, 1.35vw, 0.95rem);
   line-height: 1.2;
+  transition: color 260ms ease;
 }
 
 .csl-journey__card p {
+  position: relative;
+  z-index: 1;
   max-width: 21ch;
   margin: 0;
   color: #141820;
   font-size: clamp(0.69rem, 1.08vw, 0.8rem);
   line-height: 1.35;
+  transition: color 260ms ease;
 }
 
 .csl-journey__card--featured h3,
@@ -5830,21 +5858,63 @@ a {
 }
 
 @media (hover: hover) {
-  .csl-journey__step:hover .csl-journey__card {
-    box-shadow: 0 20px 34px -22px rgba(25, 76, 192, 0.62);
-    transform: translateY(-4px);
+  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
+    .csl-journey__card--featured {
+    border-color: #3675ff;
+    box-shadow: 0 12px 24px -20px rgba(22, 64, 151, 0.38);
   }
 
-  .csl-journey__step:hover .csl-journey__node {
+  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
+    .csl-journey__card--featured::before {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
+    .csl-journey__card--featured
+    h3 {
+    color: #1551c7;
+  }
+
+  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
+    .csl-journey__card--featured
+    p {
+    color: #141820;
+  }
+
+  .csl-journey__card:hover {
+    border-color: transparent;
+    box-shadow:
+      0 24px 42px -20px rgba(25, 76, 192, 0.72),
+      0 8px 18px -12px rgba(13, 63, 156, 0.55);
+    transform: translateY(-7px) scale(1.015);
+  }
+
+  .csl-journey__card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .csl-journey__card:hover h3,
+  .csl-journey__card:hover p {
+    color: var(--white);
+  }
+
+  .csl-journey__card:hover + .csl-journey__node {
+    background: #2b66ee;
     box-shadow:
       0 0 0 4px var(--cream),
-      0 13px 22px -9px rgba(25, 76, 192, 0.95);
-    transform: scale(1.08);
+      0 0 0 6px rgba(43, 102, 238, 0.2),
+      0 15px 26px -9px rgba(25, 76, 192, 0.95);
+    transform: translateY(-2px) scale(1.12);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .csl-journey__card,
+  .csl-journey__card::before,
+  .csl-journey__card h3,
+  .csl-journey__card p,
   .csl-journey__node {
     transition: none !important;
   }
