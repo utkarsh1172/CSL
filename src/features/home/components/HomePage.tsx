@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { LeadCard } from "@/components/sections/LeadCard";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { TrustedSection } from "@/components/sections/TrustedSection";
 import { homePage } from "@/content/pages/home";
 import { testimonials } from "@/content/shared/testimonials";
@@ -15,7 +16,6 @@ import { OutcomesSection } from "./OutcomesSection";
 import { PartnershipSection } from "./PartnershipSection";
 import { PlateauSection } from "./PlateauSection";
 import { ProgramsSection } from "./ProgramsSection";
-import { TestimonialsSection } from "./TestimonialsSection";
 
 export function HomePage() {
   return (
@@ -47,7 +47,11 @@ export function HomePage() {
           <TrustedSection heading={homePage.trustedBy} />
           <OutcomesSection outcomes={homePage.outcomes} />
           <JourneySection journey={homePage.journey} />
-          <TestimonialsSection content={homePage.testimonials} testimonials={testimonials} />
+          <TestimonialsSection
+            heading={homePage.testimonials.heading}
+            headingId="home-testimonials-heading"
+            testimonials={testimonials}
+          />
           {/* <ActivationSection activation={homePage.activation} /> */}
           {/* The header's "Frequently Asked Questions" link lands here (/#faqs). */}
           <FaqSection

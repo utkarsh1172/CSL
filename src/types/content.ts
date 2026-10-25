@@ -52,6 +52,10 @@ export type Testimonial = {
 export type Mentor = {
   name: string
   role: string
+  /** Local portrait used in mentor and coach rosters. */
+  imageSrc?: string
+  /** Portraits sit beside a visible name, so an empty alt keeps that name from being repeated. */
+  imageAlt?: string
   /** Where "View profile" leads; the advisor form until mentor profiles exist. */
   profileHref: string
 }

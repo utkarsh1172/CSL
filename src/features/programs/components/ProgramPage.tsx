@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { LeadCard } from "@/components/sections/LeadCard";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { mentors } from "@/content/shared/mentors";
 import { testimonials } from "@/content/shared/testimonials";
 import type { Program } from "@/types/program";
@@ -19,7 +20,6 @@ import { ProgramCallToAction } from "./ProgramCallToAction";
 import { ProgramHero } from "./ProgramHero";
 import { ProgramSubnav } from "./ProgramSubnav";
 import { RecognitionSection } from "./RecognitionSection";
-import { TestimonialsSection } from "./TestimonialsSection";
 
 type ProgramPageProps = {
   program: Program;
@@ -56,7 +56,11 @@ export function ProgramPage({ program }: ProgramPageProps) {
           <DeliverablesSection deliverables={program.deliverables} />
           <BenefitsSection benefits={program.benefits} />
           <MentorsSection content={program.mentors} mentors={mentors} />
-          <TestimonialsSection content={program.testimonials} testimonials={testimonials} />
+          <TestimonialsSection
+            heading={program.testimonials.heading}
+            headingId="program-testimonials-heading"
+            testimonials={testimonials}
+          />
           <RecognitionSection recognition={program.recognition} />
           <DifferenceSection difference={program.difference} />
           <ProgramCallToAction brochureHref={program.brochureHref} callToAction={program.callToAction} />

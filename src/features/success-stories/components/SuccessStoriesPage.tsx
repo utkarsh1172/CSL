@@ -3,12 +3,12 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyAsideLayout } from "@/components/layout/StickyAsideLayout";
 import { LeadCard } from "@/components/sections/LeadCard";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { successStories } from "@/content/pages/success-stories";
 
 import { CaseStudiesSection } from "./CaseStudiesSection";
 import { FacultySection } from "./FacultySection";
 import { SuccessHero } from "./SuccessHero";
-import { TestimonialsSection } from "./TestimonialsSection";
 import { TransformationSection } from "./TransformationSection";
 import { VideosSection } from "./VideosSection";
 
@@ -38,7 +38,14 @@ export function SuccessStoriesPage() {
           }
           asideId="talk-to-advisor"
         >
-          <TestimonialsSection testimonials={successStories.testimonials} />
+          <TestimonialsSection
+            className="success-block"
+            contained={false}
+            heading={successStories.testimonials.heading}
+            headingId="testimonials-heading"
+            showSeeMore={false}
+            testimonials={successStories.testimonials.items}
+          />
           <VideosSection videos={successStories.videos} />
           <FacultySection faculty={successStories.faculty} />
           <CaseStudiesSection caseStudies={successStories.caseStudies} />
