@@ -1,3 +1,4 @@
+import { ExpandableList } from "@/components/ui/ExpandableList";
 import { SeeMoreStoriesLink } from "@/components/ui/SeeMoreStoriesLink";
 import { TestimonialCard } from "@/components/ui/TestimonialCard";
 import type { HeadingContent, Testimonial } from "@/types/content";
@@ -11,6 +12,8 @@ type TestimonialsSectionProps = {
   className?: string;
   contained?: boolean;
   showSeeMore?: boolean;
+  /** Show this many testimonials, with a "Show More" button that opens the rest in place. */
+  initialCount?: number;
 };
 
 /** Shared testimonial section used across marketing and program pages. */
@@ -21,7 +24,13 @@ export function TestimonialsSection({
   className = "page-section page-section--ruled",
   contained = true,
   showSeeMore = true,
+  initialCount,
 }: TestimonialsSectionProps) {
+  const cards = testimonials.map((testimonial, index) => ({
+    key: `${testimonial.name}-${index}`,
+    node: <TestimonialCard testimonial={testimonial} variant="flip" />,
+  }));
+
   const content = (
     <>
       <SectionHeading
@@ -33,13 +42,22 @@ export function TestimonialsSection({
         id={headingId}
         title={heading.title}
       />
-      <ul className="testimonial-grid" data-reveal-children="">
-        {testimonials.map((testimonial) => (
-          <li key={testimonial.name}>
-            <TestimonialCard testimonial={testimonial} variant="flip" />
-          </li>
-        ))}
-      </ul>
+      {initialCount ? (
+        <ExpandableList
+          className="testimonial-grid"
+          initialCount={initialCount}
+          items={cards}
+          lessLabel="Show Less"
+          moreLabel="Show More"
+          withArrow
+        />
+      ) : (
+        <ul className="testimonial-grid" data-reveal-children="">
+          {cards.map((card) => (
+            <li key={card.key}>{card.node}</li>
+          ))}
+        </ul>
+      )}
       {showSeeMore ? <SeeMoreStoriesLink /> : null}
     </>
   );
