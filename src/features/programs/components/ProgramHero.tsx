@@ -30,7 +30,7 @@ export function ProgramHero({ hero }: ProgramHeroProps) {
           fill
           loading={hasBackgroundArtwork ? "eager" : undefined}
           preload={!hasBackgroundArtwork}
-          sizes="(max-width: 900px) 88vw, 50vw"
+          sizes="(max-width: 900px) 92vw, 52vw"
           src={hero.imageSrc}
         />
       </div>

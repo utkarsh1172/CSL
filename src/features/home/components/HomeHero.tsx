@@ -14,7 +14,7 @@ export function HomeHero({ hero }: HomeHeroProps) {
   return (
     <section aria-labelledby="home-heading" className="home-hero">
       <div className="home-hero__visual">
-        <Image alt={hero.imageAlt} fill priority sizes="100vw" src={hero.imageSrc} />
+        <Image alt={hero.imageAlt} fill preload sizes="100vw" src={hero.imageSrc} />
       </div>
 
       <div className="section-shell home-hero__inner">

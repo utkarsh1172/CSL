@@ -27,7 +27,7 @@ export function DifferenceSection({ difference }: DifferenceSectionProps) {
 
         <div className="derisk-banner" data-reveal="zoom">
           <div aria-hidden="true" className="derisk-banner__visual">
-            <Image alt="" fill sizes="(max-width: 900px) 100vw, 840px" src={banner.imageSrc} />
+            <Image alt="" fill sizes="(max-width: 1080px) 100vw, 844px" src={banner.imageSrc} />
           </div>
 
           <div className="derisk-banner__copy">

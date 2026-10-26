@@ -23,7 +23,7 @@ export function WhySection({ why }: WhySectionProps) {
         />
 
         <figure className="about-why__media" data-reveal="zoom" data-reveal-delay="2">
-          <Image alt={why.imageAlt} fill sizes="(max-width: 900px) 100vw, 790px" src={why.imageSrc} />
+          <Image alt={why.imageAlt} fill sizes="(max-width: 1080px) 100vw, 790px" src={why.imageSrc} />
         </figure>
 
         <ul className="about-why__gaps" data-reveal-children="">

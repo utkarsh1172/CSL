@@ -39,7 +39,8 @@ export const aiLeadershipProgram: Program = {
     { id: "faculty", label: "Mentor & Coaches" },
     { id: "testimonials", label: "Testimonials" },
     { id: "recognition", label: "Digital Recognition" },
-    { id: "faqs", label: "FAQs" },
+    // The program's own FAQ list; the organisation-wide one (id "faqs") is hidden for now.
+    { id: "program-faqs", label: "FAQs" },
   ],
   advisor: {
     title: "Explore the AI Leadership program",

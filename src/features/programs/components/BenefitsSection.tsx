@@ -46,7 +46,7 @@ export function BenefitsSection({ benefits }: BenefitsSectionProps) {
           </ol>
 
           <figure className="journey-media journey-media--tall" data-reveal="zoom" data-reveal-delay="2">
-            <Image alt={benefits.imageAlt} fill sizes="(max-width: 900px) 100vw, 340px" src={benefits.imageSrc} />
+            <Image alt={benefits.imageAlt} fill sizes="(max-width: 900px) 100vw, (max-width: 1080px) 460px, 390px" src={benefits.imageSrc} />
             <JourneyPath stages={benefits.journey} />
           </figure>
         </div>

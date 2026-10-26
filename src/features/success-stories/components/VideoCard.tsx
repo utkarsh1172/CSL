@@ -18,7 +18,7 @@ function PlayIcon() {
 export function VideoCard({ video }: VideoCardProps) {
   const content = (
     <>
-      <Image alt={video.imageAlt} fill sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 280px" src={video.imageSrc} />
+      <Image alt={video.imageAlt} fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 320px" src={video.imageSrc} />
       <span aria-hidden="true" className="video-card__play">
         <PlayIcon />
       </span>

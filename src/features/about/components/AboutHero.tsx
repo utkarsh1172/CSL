@@ -13,7 +13,7 @@ export function AboutHero({ hero }: AboutHeroProps) {
   return (
     <section aria-labelledby="about-heading" className="about-hero">
       <div className="about-hero__visual">
-        <Image alt={hero.imageAlt} fill priority sizes="100vw" src={hero.imageSrc} />
+        <Image alt={hero.imageAlt} fill preload sizes="100vw" src={hero.imageSrc} />
       </div>
 
       <div className="section-shell about-hero__inner">

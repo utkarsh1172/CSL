@@ -12,6 +12,7 @@ import {
   footerQuickLinks,
   footerRegionalPrograms,
 } from "@/config/footer";
+import { prefetchFor } from "@/config/routes";
 import { contactDetails } from "@/content/pages/contact";
 
 function LinkedInIcon() {
@@ -36,7 +37,9 @@ export function SiteFooter() {
               <Image
                 alt="Canada School of Leadership"
                 height={80}
-                src="/images/brand/csl-logo-white-4k.png"
+                // 720px wide: three device pixels per CSS pixel at the footer's 240px, cut from
+                // the 4K master csl-logo-white-4k.png.
+                src="/images/brand/csl-logo-white.png"
                 unoptimized
                 width={231}
               />
@@ -58,7 +61,9 @@ export function SiteFooter() {
                 <ul>
                   {group.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href}>{link.label}</Link>
+                      <Link href={link.href} prefetch={prefetchFor(link.href)}>
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -69,7 +74,9 @@ export function SiteFooter() {
               <ul>
                 {footerQuickLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href}>{link.label}</Link>
+                    <Link href={link.href} prefetch={prefetchFor(link.href)}>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -92,7 +99,9 @@ export function SiteFooter() {
             <ul>
               {footerLeadershipPrograms.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link href={link.href} prefetch={prefetchFor(link.href)}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -123,7 +132,9 @@ export function SiteFooter() {
               {footerRegionalPrograms.map((link, index) => (
                 <Fragment key={link.href}>
                   {index > 0 ? <span aria-hidden="true"> | </span> : null}
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link href={link.href} prefetch={prefetchFor(link.href)}>
+                    {link.label}
+                  </Link>
                 </Fragment>
               ))}
             </p>

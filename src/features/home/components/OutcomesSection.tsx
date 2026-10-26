@@ -7,6 +7,13 @@ type OutcomesSectionProps = {
   outcomes: HomeOutcomes;
 };
 
+// Rendered widths: phones show each card as a row with a ≤150px thumbnail; tablets lay the cards
+// out three over two, the last two wider; desktops show five across at about 160px.
+const outcomeSizes = {
+  narrow: "(max-width: 510px) 150px, (max-width: 900px) 240px, (max-width: 1080px) 190px, 160px",
+  wide: "(max-width: 510px) 150px, (max-width: 900px) 360px, (max-width: 1080px) 190px, 160px",
+};
+
 /** What participants gain, then the roles they step into; each row rises in card by card. */
 export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
   const { heading } = outcomes;
@@ -37,7 +44,7 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
                   <Image
                     alt=""
                     fill
-                    sizes="(max-width: 720px) 240px, 320px"
+                    sizes={index < 3 ? outcomeSizes.narrow : outcomeSizes.wide}
                     src={shift.imageSrc}
                     style={{ objectPosition: shift.imagePosition }}
                   />

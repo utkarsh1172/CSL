@@ -59,7 +59,7 @@ export function ProgramsSection({ programs }: ProgramsSectionProps) {
                   <Image
                     alt=""
                     fill
-                    sizes="(max-width: 520px) 100vw, (max-width: 1080px) 50vw, 210px"
+                    sizes="(max-width: 520px) 100vw, (max-width: 900px) 50vw, (max-width: 1080px) 25vw, 210px"
                     src={program.imageSrc}
                   />
                 </div>

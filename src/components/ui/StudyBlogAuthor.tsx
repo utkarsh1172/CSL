@@ -19,7 +19,7 @@ export function StudyBlogAuthor({
           alt={`${name} avatar`}
           width={60}
           height={60}
-          priority
+          loading="eager"
         />
       </div>
       <div className="study-blog-author__info">

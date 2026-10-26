@@ -14,7 +14,7 @@ export function TransformationSection({ transformation }: TransformationSectionP
       <div className="section-shell">
         <div className="transformation-card" data-reveal="zoom">
           <div aria-hidden="true" className="transformation-card__visual">
-            <Image alt="" fill sizes="(max-width: 900px) 100vw, 800px" src={transformation.imageSrc} />
+            <Image alt="" fill sizes="(max-width: 1080px) 100vw, 844px" src={transformation.imageSrc} />
           </div>
 
           <div className="transformation-card__copy">

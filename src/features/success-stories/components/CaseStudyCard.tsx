@@ -22,7 +22,7 @@ export function CaseStudyCard({ study }: CaseStudyCardProps) {
       <Image
         alt={study.imageAlt}
         fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 300px"
+        sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 250px"
         src={study.imageSrc}
         style={study.imagePosition ? { objectPosition: study.imagePosition } : undefined}
       />

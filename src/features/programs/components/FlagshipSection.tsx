@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { prefetchFor } from "@/config/routes";
 import type { Program } from "@/types/program";
 
 type FlagshipSectionProps = {
@@ -38,6 +39,7 @@ export function FlagshipSection({ flagship }: FlagshipSectionProps) {
               <Link
                 className={`flagship-card${index === 0 ? " flagship-card--featured" : ""}`}
                 href={program.href}
+                prefetch={prefetchFor(program.href)}
               >
                 <span className="flagship-card__title">
                   {program.title}

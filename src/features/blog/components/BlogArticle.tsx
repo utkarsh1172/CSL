@@ -133,7 +133,7 @@ export function BlogArticle({ post, relatedPosts }: BlogArticleProps) {
                 <Image
                   alt={post.imageAlt}
                   height={409}
-                  priority
+                  preload
                   sizes="(max-width: 760px) calc(100vw - 28px), 1100px"
                   src={post.imageSrc}
                   width={1084}

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { RevealLines } from "@/components/ui/RevealLines";
@@ -48,7 +49,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
       <section className="blog-hero" aria-labelledby="blog-heading">
         <div className="blog-hero__inner">
           <nav aria-label="Breadcrumb" className="blog-breadcrumb" data-reveal="eyebrow">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span aria-hidden="true">&gt;</span>
             <span>Discover</span>
             <span aria-hidden="true">&gt;</span>
@@ -131,7 +132,7 @@ export function BlogDirectory({ categories, posts }: BlogDirectoryProps) {
                 // Keyed by category so switching filters replays the card entrance for every result.
                 <div className="blog-posts__grid" key={selectedCategory ?? "all"}>
                   {visiblePosts.map((post, index) => (
-                    <BlogCard key={post.id} post={post} revealDelay={index % 3} />
+                    <BlogCard eager={index === 0} key={post.id} post={post} revealDelay={index % 3} />
                   ))}
                 </div>
               ) : (

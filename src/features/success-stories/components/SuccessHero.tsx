@@ -42,7 +42,7 @@ export function SuccessHero({ hero }: SuccessHeroProps) {
   return (
     <section aria-labelledby="success-heading" className="success-hero">
       <div className="success-hero__visual">
-        <Image alt={hero.imageAlt} fill priority sizes="(max-width: 900px) 100vw, 55vw" src={hero.imageSrc} />
+        <Image alt={hero.imageAlt} fill preload sizes="(max-width: 900px) 100vw, 58vw" src={hero.imageSrc} />
       </div>
 
       <div className="section-shell success-hero__inner">

@@ -30,7 +30,7 @@ export function CurriculumSection({ curriculum }: CurriculumSectionProps) {
         />
 
         <figure className="journey-media" data-reveal="zoom" data-reveal-delay="2">
-          <Image alt={curriculum.imageAlt} fill sizes="(max-width: 900px) 100vw, 720px" src={curriculum.imageSrc} />
+          <Image alt={curriculum.imageAlt} fill sizes="(max-width: 1080px) 100vw, 844px" src={curriculum.imageSrc} />
           <JourneyPath stages={curriculum.journey} />
         </figure>
 

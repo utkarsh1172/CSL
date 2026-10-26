@@ -31,7 +31,7 @@ export function OverviewSection({ overview, brochureHref }: OverviewSectionProps
           </div>
 
           <figure className="overview-card__media">
-            <Image alt={overview.imageAlt} fill sizes="(max-width: 900px) 100vw, 260px" src={overview.imageSrc} />
+            <Image alt={overview.imageAlt} fill sizes="(max-width: 900px) 100vw, (max-width: 1080px) 350px, 300px" src={overview.imageSrc} />
           </figure>
         </div>
 

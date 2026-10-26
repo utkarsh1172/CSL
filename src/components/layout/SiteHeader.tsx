@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { navigationGroups } from "@/config/navigation";
+import { prefetchFor } from "@/config/routes";
 
 import { BrandLogo } from "../ui/BrandLogo";
 
@@ -57,7 +58,7 @@ export function SiteHeader() {
   return (
     <header className="site-header" data-scrolled={scrolled ? "" : undefined}>
       <div className="site-header__inner">
-        <BrandLogo priority />
+        <BrandLogo eager />
 
         <nav className="desktop-navigation" aria-label="Primary navigation" ref={navigationRef}>
           {navigationGroups.map((group) => (
@@ -99,7 +100,12 @@ export function SiteHeader() {
                 inert={openGroup !== group.label}
               >
                 {group.links.map((link) => (
-                  <Link aria-label={link.label} href={link.href} key={link.href}>
+                  <Link
+                    aria-label={link.label}
+                    href={link.href}
+                    key={link.href}
+                    prefetch={prefetchFor(link.href)}
+                  >
                     {link.label}
                   </Link>
                 ))}
@@ -131,7 +137,12 @@ export function SiteHeader() {
                 </summary>
                 <div>
                   {group.links.map((link) => (
-                    <Link aria-label={link.label} href={link.href} key={link.href}>
+                    <Link
+                      aria-label={link.label}
+                      href={link.href}
+                      key={link.href}
+                      prefetch={prefetchFor(link.href)}
+                    >
                       {link.label}
                     </Link>
                   ))}

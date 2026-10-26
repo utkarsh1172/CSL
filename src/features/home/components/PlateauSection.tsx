@@ -36,7 +36,7 @@ export function PlateauSection({ plateau }: PlateauSectionProps) {
             <Image
               alt={plateau.imageAlt}
               fill
-              sizes="(max-width: 900px) 100vw, 790px"
+              sizes="(max-width: 1080px) 100vw, 844px"
               src={plateau.imageSrc}
             />
           </figure>

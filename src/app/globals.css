@@ -10939,6 +10939,11 @@ a {
 
 .site-footer::before {
   background-image: url("/images/shared/footer-executive-meeting-vitaly-gariev.jpg");
+  /* The same photo as WebP (76KB rather than 180KB); the JPEG above stays for older browsers. */
+  background-image: image-set(
+    url("/images/shared/footer-executive-meeting-vitaly-gariev.webp") type("image/webp"),
+    url("/images/shared/footer-executive-meeting-vitaly-gariev.jpg") type("image/jpeg")
+  );
   background-position: center 43%;
   background-size: cover;
   filter: saturate(0.72) contrast(1.06);

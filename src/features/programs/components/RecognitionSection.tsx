@@ -66,7 +66,7 @@ export function RecognitionSection({ recognition }: RecognitionSectionProps) {
             <Image
               alt={recognition.imageAlt ?? ""}
               fill
-              sizes="(max-width: 900px) 80vw, 360px"
+              sizes="(max-width: 400px) 100vw, 350px"
               src={recognition.imageSrc}
             />
           ) : (

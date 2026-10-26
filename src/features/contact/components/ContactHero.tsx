@@ -21,8 +21,8 @@ export function ContactHero() {
         <Image
           alt=""
           fill
-          priority
-          sizes="(max-width: 900px) 100vw, 56vw"
+          preload
+          sizes="(max-width: 900px) 100vw, 60vw"
           src={contactHero.imageSrc}
         />
       </div>
