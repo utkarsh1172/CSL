@@ -1,5 +1,6 @@
 import { mentors } from "@/content/shared/mentors";
 import { testimonials } from "@/content/shared/testimonials";
+import type { Testimonial } from "@/types/content";
 import type { CaseStudy, StoryVideo, SuccessStoriesContent } from "@/types/success-story";
 
 const learningHeading = {
@@ -8,6 +9,18 @@ const learningHeading = {
   description:
     "Perspectives from technology leaders on how the program shaped their thinking, decision-making and approach to AI.",
 };
+
+// Placeholder testimonials, like the placeholder case studies below, so the list has more to open
+// behind "Show More". Replace each with an approved participant quote; with three or fewer
+// testimonials in total, the button hides itself.
+const placeholderTestimonials: Testimonial[] = Array.from({ length: 3 }, () => ({
+  quote:
+    "Perspectives from technology leaders on how the program shaped their thinking, decision-making and approach to AI.",
+  name: "Name Of Leader",
+  role: "Leadership Role",
+  organization: "Organisation",
+  region: "Region",
+}));
 
 // Placeholder episodes until the podcast thumbnails and links are supplied.
 const placeholderVideos: StoryVideo[] = Array.from({ length: 6 }, (_, index) => ({
@@ -50,7 +63,7 @@ export const successStories: SuccessStoriesContent = {
   },
   testimonials: {
     heading: { eyebrow: "Testimonials", ...learningHeading },
-    items: testimonials,
+    items: [...testimonials, ...placeholderTestimonials],
   },
   videos: {
     heading: { eyebrow: "Video", ...learningHeading },

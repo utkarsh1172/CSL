@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  experimental: {
+    // Flags Next.js releases that fix published security advisories when AI coding agents run
+    // `next dev` or `next build`, so the app is kept on a patched version.
+    agentUpgrade: "security",
+  },
   // Files in public/images (logos, flags, the footer photo) are otherwise served with
   // max-age=0, so browsers re-check every one on each full page load. Browsers keep them for a
   // day, then keep using them for up to a week while checking for a newer copy in the

@@ -43,6 +43,7 @@ export function SuccessStoriesPage() {
             contained={false}
             heading={successStories.testimonials.heading}
             headingId="testimonials-heading"
+            initialCount={3}
             showSeeMore={false}
             testimonials={successStories.testimonials.items}
           />

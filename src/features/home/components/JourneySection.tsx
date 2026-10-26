@@ -32,6 +32,8 @@ export function JourneySection({ journey }: JourneySectionProps) {
         <div className="csl-journey" data-reveal="grow">
           <div aria-hidden="true" className="csl-journey__track">
             <span className="csl-journey__progress" />
+            {/* Lights the line from the first stage to the one being pointed at. */}
+            <span className="csl-journey__highlight" />
           </div>
 
           <ol className="csl-journey__steps">
@@ -41,9 +43,7 @@ export function JourneySection({ journey }: JourneySectionProps) {
                 key={`${step.title}-${index}`}
                 style={{ "--journey-step": index } as CSSProperties}
               >
-                <div
-                  className={`csl-journey__card${index === 0 ? " csl-journey__card--featured" : ""}`}
-                >
+                <div className="csl-journey__card">
                   <h3>{step.title}</h3>
                   <p>{step.summary}</p>
                 </div>

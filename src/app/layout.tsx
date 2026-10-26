@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { ContactPopup } from "@/components/forms/ContactPopup";
 import { AnalyticsTags } from "@/components/layout/AnalyticsTags";
 import { BoomClickEffects } from "@/components/ui/BoomClickEffects";
 import { CtaTracking } from "@/components/ui/CtaTracking";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <CtaTracking />
         <AnalyticsTags />
         {children}
+        <ContactPopup />
       </body>
     </html>
   );
