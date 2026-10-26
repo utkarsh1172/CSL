@@ -28,7 +28,7 @@ export function TestimonialsSection({
 }: TestimonialsSectionProps) {
   const cards = testimonials.map((testimonial, index) => ({
     key: `${testimonial.name}-${index}`,
-    node: <TestimonialCard testimonial={testimonial} variant="flip" />,
+    node: <TestimonialCard testimonial={testimonial} />,
   }));
 
   const content = (

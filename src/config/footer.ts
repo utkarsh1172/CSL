@@ -29,16 +29,16 @@ export const footerQuickLinks: NavigationLink[] = [
 
 export const footerLeadershipPrograms: NavigationLink[] = [
   { label: "AI Leadership Program", href: "/programs/ai-leadership" },
-  { label: "CIO Leadership Program", href: "/programs/cio-leadership" },
-  { label: "CDO Leadership Program", href: "/programs/cdo-leadership" },
-  { label: "CISO Leadership Program", href: "/programs/ciso-leadership" },
-  { label: "CXO Leadership Program", href: "/programs/cxo-leadership" },
-  { label: "CAIO Leadership Program", href: "/programs/caio-leadership" },
-  { label: "Cybersecurity Leadership Program", href: "/programs/cybersecurity-leadership" },
-  { label: "Data & AI Leadership Program", href: "/programs/data-ai-leadership" },
+  { label: "CIO Leadership Program", href: "/contact" },
+  { label: "CDO Leadership Program", href: "/contact" },
+  { label: "CISO Leadership Program", href: "/contact" },
+  { label: "CXO Leadership Program", href: "/contact" },
+  { label: "CAIO Leadership Program", href: "/contact" },
+  { label: "Cybersecurity Leadership Program", href: "/contact" },
+  { label: "Data & AI Leadership Program", href: "/contact" },
   {
     label: "Digital Transformation Leadership Program",
-    href: "/programs/digital-transformation-leadership",
+    href: "/contact",
   },
 ];
 

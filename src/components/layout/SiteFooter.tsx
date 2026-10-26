@@ -98,7 +98,7 @@ export function SiteFooter() {
             <h2>Leadership Programs</h2>
             <ul>
               {footerLeadershipPrograms.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link href={link.href} prefetch={prefetchFor(link.href)}>
                     {link.label}
                   </Link>

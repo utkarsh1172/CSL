@@ -11,7 +11,7 @@ export const navigationGroups: NavigationGroup[] = [
     label: "Discover",
     links: [
       { label: "About Us", href: "/about" },
-      { label: "Why CSL", href: "/about#why-csl" },
+      // { label: "Why CSL", href: "/about#why-csl" },
       { label: "Our Approach", href: "/about#our-approach" },
       { label: "Blog", href: "/blog" },
     ],

@@ -7,13 +7,29 @@ type RecognitionSectionProps = {
   recognition: Program["recognition"];
 };
 
-function ShareIcon() {
+function RecognitionBadgeIcon({ badge }: { badge: string }) {
+  if (badge === "LinkedIn Ready") {
+    return (
+      <svg aria-hidden="true" className="recognition-badges__icon" viewBox="0 0 24 24">
+        <circle cx="5" cy="5" r="1.75" />
+        <path d="M3.25 9.25h3.5v11.5h-3.5zM10.25 20.75V9.25h3.5v1.6c.9-1.25 2.15-1.9 3.6-1.9 2.35 0 3.4 1.55 3.4 4.45v7.35h-3.5v-6.6c0-1.4-.5-2.1-1.5-2.1-1.25 0-2 1-2 2.65v6.05z" />
+      </svg>
+    );
+  }
+
+  if (badge === "Digital Badge") {
+    return (
+      <svg aria-hidden="true" className="recognition-badges__icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="8.5" r="5" />
+        <path d="m8.8 12.3-1.25 8.2L12 18l4.45 2.5-1.25-8.2" />
+      </svg>
+    );
+  }
+
   return (
     <svg aria-hidden="true" className="recognition-badges__icon" viewBox="0 0 24 24">
-      <circle cx="18" cy="5" r="2.6" />
-      <circle cx="6" cy="12" r="2.6" />
-      <circle cx="18" cy="19" r="2.6" />
-      <path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" />
+      <path d="m12 2.75 2.05 1.45 2.5-.25.95 2.3 2.25 1.15-.25 2.5 1.45 2.1-1.45 2.05.25 2.5-2.25 1.15-.95 2.3-2.5-.25L12 21.25 9.95 19.8l-2.5.25-.95-2.3-2.25-1.15.25-2.5L3.05 12 4.5 9.95l-.25-2.5L6.5 6.3l.95-2.3 2.5.25L12 2.75Z" />
+      <path d="m8.75 12.1 2.05 2.05 4.45-4.55" />
     </svg>
   );
 }
@@ -48,8 +64,8 @@ export function RecognitionSection({ recognition }: RecognitionSectionProps) {
           <ul className="recognition-badges" data-reveal-children="">
             {recognition.badges.map((badge) => (
               <li key={badge}>
+                <RecognitionBadgeIcon badge={badge} />
                 {badge}
-                <ShareIcon />
               </li>
             ))}
           </ul>
