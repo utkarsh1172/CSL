@@ -5610,6 +5610,40 @@ a {
   grid-template-rows: var(--journey-card-row) var(--journey-node) var(--journey-card-row);
   row-gap: var(--journey-row-gap);
   min-width: 0;
+  /* Only the card and its number respond to the pointer, not the empty half of the column, so
+     :hover on a step means one of those two is being pointed at. */
+  pointer-events: none;
+}
+
+.csl-journey__card,
+.csl-journey__node {
+  pointer-events: auto;
+}
+
+/* Connector between a card and its number, drawn on hover. It spans the gap plus the 6px the
+   card moves away from the line. */
+.csl-journey__step::after {
+  position: absolute;
+  z-index: 1;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: calc(var(--journey-row-gap) + 6px);
+  background: linear-gradient(180deg, #3f84ff, #1a48bc);
+  border-radius: 2px;
+  content: "";
+  pointer-events: none;
+  scale: 1 0;
+  transition: scale 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.csl-journey__step--above::after {
+  top: calc(var(--journey-card-row) - 6px);
+  transform-origin: center bottom;
+}
+
+.csl-journey__step--below::after {
+  top: calc(var(--journey-card-row) + var(--journey-row-gap) + var(--journey-node));
+  transform-origin: center top;
 }
 
 .csl-journey__track {
@@ -5630,6 +5664,19 @@ a {
   background: linear-gradient(90deg, #194cc0, #3a71e9);
   border-radius: inherit;
   transform-origin: left center;
+  transition: opacity 320ms ease 120ms;
+}
+
+/* The lit stretch of line, from the first number to the one pointed at. Leaving a card waits a
+   moment before resetting, so moving between neighbouring cards glides instead of flickering. */
+.csl-journey__highlight {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #1a48bc, #3f84ff);
+  border-radius: inherit;
+  transform-origin: left center;
+  scale: 0 1;
+  transition: scale 560ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
 }
 
 .csl-journey__card {
@@ -5651,23 +5698,55 @@ a {
   border: 1px solid #3675ff;
   border-radius: 12px;
   box-shadow: 0 12px 24px -20px rgba(22, 64, 151, 0.38);
+  cursor: default;
   transition:
     border-color 280ms ease,
     box-shadow 320ms ease,
-    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 320ms ease 120ms;
 }
 
+/* The blue fill waits as a sliver on the edge facing the line; on hover it rises out of it. */
 .csl-journey__card::before {
   position: absolute;
   z-index: -1;
   inset: 0;
   background: linear-gradient(120deg, #1747c0 0%, #2b66ee 52%, #3f84ff 100%);
   content: "";
+  clip-path: inset(100% 0 0 0);
+  /* Draining back is quick and accelerates to the edge, so no sliver of colour lingers. */
+  transition: clip-path 200ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+.csl-journey__step--below .csl-journey__card::before {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* A soft light that sweeps across the card once as it fills. */
+.csl-journey__card::after {
+  position: absolute;
+  z-index: 0;
+  top: -20%;
+  bottom: -20%;
+  left: -55%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  content: "";
   opacity: 0;
-  transform: scale(0.94);
-  transition:
-    opacity 280ms ease,
-    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  transform: skewX(-18deg);
+}
+
+@keyframes csl-journey-sheen {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 480% 0;
+  }
 }
 
 .csl-journey__step--above .csl-journey__card {
@@ -5678,18 +5757,6 @@ a {
   grid-row: 3;
 }
 
-.csl-journey__card--featured {
-  color: var(--white);
-  background: rgba(250, 249, 246, 0.9);
-  border-color: transparent;
-  box-shadow: 0 16px 28px -18px rgba(25, 76, 192, 0.62);
-}
-
-.csl-journey__card--featured::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .csl-journey__card h3 {
   position: relative;
   z-index: 1;
@@ -5698,7 +5765,7 @@ a {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(0.82rem, 1.35vw, 0.95rem);
   line-height: 1.2;
-  transition: color 260ms ease;
+  transition: color 120ms ease 70ms;
 }
 
 .csl-journey__card p {
@@ -5709,12 +5776,7 @@ a {
   color: #141820;
   font-size: clamp(0.69rem, 1.08vw, 0.8rem);
   line-height: 1.35;
-  transition: color 260ms ease;
-}
-
-.csl-journey__card--featured h3,
-.csl-journey__card--featured p {
-  color: var(--white);
+  transition: color 120ms ease 70ms;
 }
 
 .csl-journey__node {
@@ -5738,8 +5800,21 @@ a {
   font-weight: 700;
   line-height: 1;
   transition:
+    color 320ms ease,
+    background-color 320ms ease,
     box-shadow 320ms ease,
     transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* A ring that keeps leaving the number of the stage being pointed at. */
+.csl-journey__node::after {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(63, 132, 255, 0.6);
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Stage the existing draw, pop and rise motions from left to right. */
@@ -5815,6 +5890,15 @@ a {
     content: none;
   }
 
+  .csl-journey__step::after {
+    content: none;
+  }
+
+  .csl-journey__step--above .csl-journey__card::before,
+  .csl-journey__step--below .csl-journey__card::before {
+    clip-path: inset(0 100% 0 0);
+  }
+
   .csl-journey__step--above .csl-journey__card,
   .csl-journey__step--below .csl-journey__card {
     grid-row: 1;
@@ -5857,56 +5941,103 @@ a {
   }
 }
 
+/* Pointing at a stage: its card fills with colour rising out of the timeline and moves a little
+   away from it, a connector draws to its number, and the line lights up from the start to this
+   stage. Earlier stages read as done; later ones step back with outlined numbers. */
 @media (hover: hover) {
-  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
-    .csl-journey__card--featured {
-    border-color: #3675ff;
-    box-shadow: 0 12px 24px -20px rgba(22, 64, 151, 0.38);
-  }
-
-  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
-    .csl-journey__card--featured::before {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-
-  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
-    .csl-journey__card--featured
-    h3 {
-    color: #1551c7;
-  }
-
-  .csl-journey__steps:has(.csl-journey__step:not(:first-child) .csl-journey__card:hover)
-    .csl-journey__card--featured
-    p {
-    color: #141820;
-  }
-
-  .csl-journey__card:hover {
+  .csl-journey__step:hover .csl-journey__card {
     border-color: transparent;
     box-shadow:
-      0 24px 42px -20px rgba(25, 76, 192, 0.72),
-      0 8px 18px -12px rgba(13, 63, 156, 0.55);
-    transform: translateY(-7px) scale(1.015);
+      0 22px 40px -20px rgba(25, 76, 192, 0.7),
+      0 8px 18px -12px rgba(13, 63, 156, 0.5);
   }
 
-  .csl-journey__card:hover::before {
-    opacity: 1;
-    transform: scale(1);
+  .csl-journey__step--above:hover .csl-journey__card {
+    transform: translateY(-6px) scale(1.02);
   }
 
-  .csl-journey__card:hover h3,
-  .csl-journey__card:hover p {
+  .csl-journey__step--below:hover .csl-journey__card {
+    transform: translateY(6px) scale(1.02);
+  }
+
+  .csl-journey__step:hover .csl-journey__card::before {
+    clip-path: inset(0);
+    transition: clip-path 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .csl-journey__step:hover .csl-journey__card::after {
+    animation: csl-journey-sheen 950ms cubic-bezier(0.4, 0, 0.2, 1) 220ms both;
+  }
+
+  /* The text turns white just as the rising fill passes it. */
+  .csl-journey__step:hover .csl-journey__card :is(h3, p) {
     color: var(--white);
+    transition: color 100ms ease 40ms;
   }
 
-  .csl-journey__card:hover + .csl-journey__node {
-    background: #2b66ee;
+  .csl-journey__step:hover::after {
+    scale: 1 1;
+  }
+
+  .csl-journey__step:hover .csl-journey__node {
+    background-color: #2b66ee;
     box-shadow:
       0 0 0 4px var(--cream),
-      0 0 0 6px rgba(43, 102, 238, 0.2),
-      0 15px 26px -9px rgba(25, 76, 192, 0.95);
-    transform: translateY(-2px) scale(1.12);
+      0 0 0 7px rgba(43, 102, 238, 0.22),
+      0 14px 26px -8px rgba(25, 76, 192, 0.9);
+    transform: scale(1.18);
+  }
+
+  .csl-journey__step:hover .csl-journey__node::after {
+    animation: csl-core-ripple 1.8s ease-out infinite;
+  }
+
+  /* Stages still to come. */
+  .csl-journey__step:hover ~ .csl-journey__step .csl-journey__card {
+    filter: saturate(0.5) opacity(0.6);
+    transition-delay: 0s;
+  }
+
+  .csl-journey__step:hover ~ .csl-journey__step .csl-journey__node {
+    color: #194cc0;
+    background-color: #fffdf9;
+    box-shadow:
+      0 0 0 4px var(--cream),
+      inset 0 0 0 2px rgba(25, 76, 192, 0.45);
+  }
+
+  /* The line: dim the full stretch and light it up to the stage pointed at. Each number sits a
+     quarter further along the track than the last. */
+  .csl-journey:has(.csl-journey__step:hover) .csl-journey__progress {
+    opacity: 0.28;
+    transition-delay: 0s;
+  }
+
+  .csl-journey:has(.csl-journey__step:hover) .csl-journey__highlight {
+    transition-delay: 0s;
+  }
+
+  .csl-journey:has(.csl-journey__step:nth-child(2):hover) .csl-journey__highlight {
+    scale: 0.25 1;
+  }
+
+  .csl-journey:has(.csl-journey__step:nth-child(3):hover) .csl-journey__highlight {
+    scale: 0.5 1;
+  }
+
+  .csl-journey:has(.csl-journey__step:nth-child(4):hover) .csl-journey__highlight {
+    scale: 0.75 1;
+  }
+
+  .csl-journey:has(.csl-journey__step:nth-child(5):hover) .csl-journey__highlight {
+    scale: 1 1;
+  }
+
+  /* Phones and narrow windows stack the journey beside a vertical line: cards nudge sideways. */
+  @container home-journey (max-width: 620px) {
+    .csl-journey__step:hover .csl-journey__card {
+      transform: translateX(4px);
+    }
   }
 }
 
@@ -5915,8 +6046,16 @@ a {
   .csl-journey__card::before,
   .csl-journey__card h3,
   .csl-journey__card p,
-  .csl-journey__node {
+  .csl-journey__node,
+  .csl-journey__step::after,
+  .csl-journey__progress,
+  .csl-journey__highlight {
     transition: none !important;
+  }
+
+  .csl-journey__card::after,
+  .csl-journey__node::after {
+    animation: none !important;
   }
 }
 
@@ -11611,6 +11750,320 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .phone-field__panel {
+    animation: none;
+  }
+}
+
+/* "Get in Touch" popup (src/components/forms/ContactPopup.tsx), after leadershipprograms.ca's:
+   a frosted cream panel over an 80% black backdrop, fading and zooming in from 95% over 200ms.
+   The <dialog> element is the panel itself; ::backdrop is the dimmed page behind it. */
+.contact-popup {
+  --popup-royal: #1a48bc;
+  --popup-ink: #1a2028;
+  --popup-muted: #515962;
+  --popup-line: rgba(197, 203, 210, 0.7);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 448px;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 24px;
+  overflow-y: auto;
+  color: var(--popup-ink);
+  background: rgba(249, 245, 237, 0.95);
+  border: 1px solid rgba(197, 203, 210, 0.42);
+  border-radius: 12px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  outline: none;
+}
+
+.contact-popup[open] {
+  display: grid;
+  gap: 16px;
+  animation: csl-popup-in 200ms ease both;
+}
+
+.contact-popup::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  animation: csl-popup-backdrop-in 150ms ease both;
+}
+
+.contact-popup[data-closing] {
+  animation: csl-popup-out 200ms ease both;
+}
+
+.contact-popup[data-closing]::backdrop {
+  animation: csl-popup-backdrop-out 200ms ease both;
+}
+
+@keyframes csl-popup-in {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+@keyframes csl-popup-out {
+  to {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+@keyframes csl-popup-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes csl-popup-backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.contact-popup__header {
+  display: grid;
+  gap: 6px;
+  padding-right: 24px;
+}
+
+.contact-popup__header h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.contact-popup__header p {
+  margin: 0;
+  color: var(--popup-muted);
+  font-size: 0.875rem;
+  line-height: 1.43;
+}
+
+.contact-popup__form {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.contact-popup__field {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-popup__field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.contact-popup__field :is(input, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  color: var(--popup-ink);
+  background: transparent;
+  border: 1px solid var(--popup-line);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font: inherit;
+  font-size: 0.875rem;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.contact-popup__field input {
+  height: 36px;
+  padding: 4px 12px;
+}
+
+.contact-popup__field textarea {
+  min-height: 60px;
+  padding: 8px 12px;
+  line-height: 1.43;
+  resize: vertical;
+}
+
+.contact-popup__field :is(input, textarea)::placeholder {
+  color: var(--popup-muted);
+  opacity: 1;
+}
+
+.contact-popup__field :is(input, textarea):focus-visible {
+  outline: none;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px var(--popup-royal);
+}
+
+.contact-popup__error {
+  margin: 0;
+  color: #e62b34;
+  font-size: 0.875rem;
+}
+
+.contact-popup__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0.95rem 1.6rem;
+  color: #fdfcf8;
+  background: linear-gradient(135deg, #1a48bc, #0081e7);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px -10px rgba(26, 72, 188, 0.45);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 350ms ease;
+}
+
+.contact-popup__submit:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.contact-popup__submit:focus-visible {
+  outline: 2px solid var(--popup-royal);
+  outline-offset: 3px;
+}
+
+.contact-popup__submit svg,
+.contact-popup__close svg,
+.contact-popup__success-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.contact-popup__submit svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-popup__spinner {
+  animation: csl-popup-spin 1s linear infinite;
+}
+
+@keyframes csl-popup-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.contact-popup__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--popup-ink);
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 150ms ease;
+}
+
+.contact-popup__close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-popup__close:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--popup-royal);
+  outline-offset: 2px;
+}
+
+.contact-popup__success {
+  display: grid;
+  justify-items: center;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.contact-popup__success-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 50%;
+}
+
+.contact-popup__success-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-popup__success-title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.contact-popup__success-text {
+  margin: 4px 0 0;
+  color: var(--popup-muted);
+  font-size: 0.875rem;
+}
+
+@media (hover: hover) {
+  .contact-popup__submit:not(:disabled):hover {
+    box-shadow:
+      0 18px 40px -10px rgba(26, 72, 188, 0.55),
+      0 0 0 4px rgba(26, 72, 188, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .contact-popup__close:hover {
+    opacity: 1;
+  }
+}
+
+/* Phones: full width with square corners and a centred heading, as on the reference. Fields
+   use 16px text so iOS doesn't zoom in when one is tapped. */
+@media (max-width: 639px) {
+  .contact-popup {
+    max-width: none;
+    border-radius: 0;
+  }
+
+  .contact-popup__header {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .contact-popup__field :is(input, textarea) {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-popup[open],
+  .contact-popup[data-closing],
+  .contact-popup::backdrop,
+  .contact-popup[data-closing]::backdrop {
     animation: none;
   }
 }

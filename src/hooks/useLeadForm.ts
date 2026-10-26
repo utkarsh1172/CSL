@@ -7,6 +7,9 @@ import { spawnBoomBurstFrom } from "@/utils/boom-burst";
 
 export type LeadFormStatus = "idle" | "sending" | "sent" | "error";
 
+/** Set in sessionStorage once any enquiry is sent, so the contact popup stops asking. */
+export const leadSentKey = "csl_lead_sent";
+
 /**
  * Wires an enquiry form for conversion tracking: records the first interaction (form_start),
  * posts the fields to /api/leads, then records lead_submit or lead_error. A successful send
@@ -44,6 +47,9 @@ export function useLeadForm(formName: string) {
 
       setStatus("sent");
       form.reset();
+      try {
+        window.sessionStorage.setItem(leadSentKey, "1");
+      } catch {}
       trackEvent({ name: "lead_submit", form: formName, page: window.location.pathname });
       if (submitButton) spawnBoomBurstFrom(submitButton, { variant: "confetti" });
     } catch (error) {

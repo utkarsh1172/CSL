@@ -38,7 +38,7 @@ function PartnerCard({ partner, reveal }: { partner: HomePartner; reveal: "left"
     <div className="partner-card" data-reveal={reveal} data-reveal-delay="2">
       <h3 className="partner-card__brand">
         {partner.logoSrc ? (
-          <Image alt={partner.name} height={240} src={partner.logoSrc} unoptimized width={693} />
+          <Image alt={partner.name} height={288} src={partner.logoSrc} unoptimized width={826} />
         ) : (
           <PartnerWordmark name={partner.name} />
         )}

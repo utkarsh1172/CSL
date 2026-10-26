@@ -36,12 +36,12 @@ export function SiteFooter() {
             >
               <Image
                 alt="Canada School of Leadership"
-                height={80}
-                // 720px wide: three device pixels per CSS pixel at the footer's 240px, cut from
-                // the 4K master csl-logo-white-4k.png.
+                height={288}
+                // The footer logo from leadershipprograms.ca; 826px wide covers three device
+                // pixels per CSS pixel at the footer's 240px.
                 src="/images/brand/csl-logo-white.png"
                 unoptimized
-                width={231}
+                width={826}
               />
             </Link>
             <p>
