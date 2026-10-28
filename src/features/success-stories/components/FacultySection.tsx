@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { BoomCounter } from "@/components/ui/BoomCounter";
 import type { SuccessStoriesContent } from "@/types/success-story";
@@ -25,20 +27,28 @@ export function FacultySection({ faculty }: FacultySectionProps) {
             {faculty.members.map((member) => (
               <li key={member.name}>
                 <span aria-hidden="true" className="faculty-panel__avatar">
-                  {initialsOf(member.name)}
+                  {member.imageSrc ? (
+                    <Image alt="" fill sizes="46px" src={member.imageSrc} />
+                  ) : (
+                    initialsOf(member.name)
+                  )}
                 </span>
                 <span className="faculty-panel__person">
                   <strong>{member.name}</strong>
                   <span>{member.role}</span>
                 </span>
-                <a
-                  aria-label={`View profile of ${member.name}`}
-                  className="faculty-panel__profile"
-                  data-boom-click=""
-                  href={member.profileHref}
-                >
-                  View profile
-                </a>
+                {member.linkedinHref ? (
+                  <a
+                    aria-label={`View ${member.name}'s LinkedIn profile (opens in a new tab)`}
+                    className="faculty-panel__profile"
+                    data-boom-click=""
+                    href={member.linkedinHref}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    View profile
+                  </a>
+                ) : null}
               </li>
             ))}
           </ul>

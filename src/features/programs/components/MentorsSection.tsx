@@ -16,6 +16,16 @@ type MentorsSectionProps = {
 
 type RosterKind = "mentors" | "coaches";
 
+function LinkedInBadge() {
+  return (
+    <span aria-hidden="true" className="mentor-panel__linkedin">
+      <svg viewBox="0 0 24 24">
+        <path d="M5.2 7.7H1.6V22h3.6V7.7ZM3.4 2A2.1 2.1 0 1 0 3.4 6.2 2.1 2.1 0 0 0 3.4 2ZM22.4 13.8c0-4.3-2.3-6.4-5.4-6.4-2.5 0-3.6 1.4-4.2 2.3v-2H9.2V22h3.6v-7.1c0-1.9.4-3.8 2.8-3.8s2.4 2.2 2.4 3.9v7h3.6l.8-8.2Z" />
+      </svg>
+    </span>
+  );
+}
+
 export function MentorsSection({ content, mentors }: MentorsSectionProps) {
   const { heading } = content;
   const [activeRoster, setActiveRoster] = useState<RosterKind>("mentors");
@@ -67,11 +77,24 @@ export function MentorsSection({ content, mentors }: MentorsSectionProps) {
             <ul className="mentor-panel__list" data-roster={activeRoster} key={activeRoster}>
               {people.map((person) => (
                 <li key={person.name}>
-                  <a aria-label={`Talk to an advisor about ${person.name}`} href={person.profileHref}>
-                    <span className="mentor-panel__avatar">
-                      {person.imageSrc ? (
-                        <Image alt={person.imageAlt ?? ""} fill sizes="(max-width: 640px) 64px, 82px" src={person.imageSrc} />
-                      ) : null}
+                  {/* Opens the person's LinkedIn profile; without one, the advisor form as before. */}
+                  <a
+                    aria-label={
+                      person.linkedinHref
+                        ? `${person.name}, ${person.role}: LinkedIn profile (opens in a new tab)`
+                        : `Talk to an advisor about ${person.name}`
+                    }
+                    href={person.linkedinHref ?? "#talk-to-advisor"}
+                    rel={person.linkedinHref ? "noopener noreferrer" : undefined}
+                    target={person.linkedinHref ? "_blank" : undefined}
+                  >
+                    <span className="mentor-panel__photo">
+                      <span className="mentor-panel__avatar">
+                        {person.imageSrc ? (
+                          <Image alt={person.imageAlt ?? ""} fill sizes="(max-width: 640px) 64px, 82px" src={person.imageSrc} />
+                        ) : null}
+                      </span>
+                      {person.linkedinHref ? <LinkedInBadge /> : null}
                     </span>
                     <strong>{person.name}</strong>
                     <span className="mentor-panel__role">{person.role}</span>
